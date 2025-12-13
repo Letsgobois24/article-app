@@ -22,7 +22,7 @@
             <div class="flex mr-6 relative">
                 <button @click="isOpen = !isOpen"
                     class="h-9 w-9 overflow-hidden rounded-full cursor-pointer focus:ring-2" type="button">
-                    <img src="img/person-logo.png" alt="my-logo" />
+                    <img src="{{ asset('img/person-logo.png') }}" alt="my-logo" />
                 </button>
 
                 <!-- Dropdown menu -->
@@ -32,7 +32,7 @@
                     x-transition:leave="transition ease-in duration-200 origin-top-right"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     class="absolute md:block hidden bg-slate-100 top-11 right-0 rounded-md z-10 w-44 border shadow-lg">
-                    <ul class="text-body p-2 text-sm font-medium text-gray-900">
+                    <ul class="text-body p-2 text-sm font-medium">
                         <li>
                             <a href="/" class="inline-flex w-full items-center rounded p-2">Your Profile</a>
                         </li>
