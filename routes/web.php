@@ -15,8 +15,12 @@ Route::get('/about', function () {
 
 Route::get('/blogs', function () {
     // $posts = Post::with(['author', 'category'])->latest()->get();
-    $posts = Post::latest()->get();
-    return view('blogs', ['title' => 'Blog', 'posts' => $posts]);
+
+    return view('blogs', [
+        'title' => 'Blog',
+        'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(3)->onEachSide(2)->withQueryString(),
+        'categories' => Category::all(['slug', 'name'])
+    ]);
 });
 
 Route::get('/blog/{post:slug}', function (Post $post) {

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => "Rayhan Muhammad Alfarizi",
             'username' => "rymalfarizi",
             'email' => 'rayhanmalfarizi@gmail.com',
-            'job' => "college student",
+            'job' => "College Student",
             'is_admin' => true,
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
