@@ -18,25 +18,12 @@ Route::get('/blogs', function () {
 
     return view('blogs', [
         'title' => 'Blog',
-        'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(3)->onEachSide(2)->withQueryString(),
-        'categories' => Category::all(['slug', 'name'])
+        'posts' => Post::filter(request(['search', 'category', 'author']))->latest()->paginate(9)->onEachSide(2)->withQueryString(),
     ]);
 });
 
 Route::get('/blog/{post:slug}', function (Post $post) {
     return view('blog', ['title' => "Single Post", 'post' => $post]);
-});
-
-Route::get('/authors/{user:username}', function (User $user) {
-    // $posts = $user->posts->load('category', 'author');
-    $posts = $user->posts;
-    return view('blogs', ['title' => count($posts) . ' Articles by ' . $user->name, 'posts' => $posts]);
-});
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-    // $posts = $category->posts->load('category', 'author');
-    $posts = $category->posts;
-    return view('blogs', ['title' => 'Categories: ' . $category->name, 'posts' => $posts]);
 });
 
 Route::get('/contact', function () {
