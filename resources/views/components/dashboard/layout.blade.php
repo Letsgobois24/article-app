@@ -14,10 +14,10 @@
     <title>Halaman Home</title>
 </head>
 
-<body class="h-screen">
-    @yield('content')
-    <x-navbar.main />
-    <x-header>{{ $title }}</x-header>
+<body class="h-[200vh]">
+    {{-- @yield('content') --}}
+    <x-dashboard.sidebar />
+    <x-dashboard.header />
     <main class="bg-gray-100 p-4 sm:px-6 lg:px-8">
         {{ $slot }}
     </main>
