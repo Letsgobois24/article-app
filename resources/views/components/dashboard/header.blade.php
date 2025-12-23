@@ -1,7 +1,9 @@
-<nav class="fixed top-0 left-0 right-0 bg-gray-900 z-50 text-gray-100"">
+<nav class="bg-gray-900 z-50 text-gray-100 h-nav">
     {{-- Ketika layar medium --}}
-    <div class="flex items-center justify-between p-5 lg:px-8">
+    <div class="flex items-center justify-between px-5 lg:px-8">
         {{-- Logo --}}
+        <x-dashboard.side-button />
+
         <div class="flex md:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
                 <span class="sr-only">Your Company</span>
