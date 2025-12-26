@@ -19,6 +19,7 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'posts_author_id'
             );
+            $table->string('image')->nullable();
             $table->text('body');
             $table->timestamps();
             $table->foreignId('category_id')->constrained(

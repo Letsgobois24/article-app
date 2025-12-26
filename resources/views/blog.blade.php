@@ -30,11 +30,20 @@
                     class="bg-{{ $post->category->color }}-100 text-{{ $post->category->color }}-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
                     {{ $post->category->name }}
                 </a>
+
+                {{-- Post Body --}}
+                {{-- Title --}}
                 <h1
                     class="my-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                     {{ $post->title }}
                 </h1>
-                <p>{{ $post->body }}</p>
+                {{-- Body Image --}}
+                @if ($post->image)
+                    <img class="w-xl max-h-96 my-6 mx-auto object-cover" src="{{ asset('storage/' . $post->image) }}"
+                        alt="">
+                @endif
+                {{-- Body Text --}}
+                <div class="post-body">{{ Str::of($post->body)->toHtmlString() }}</div>
             </article>
         </div>
     </section>

@@ -41,28 +41,24 @@
                         x-transition:leave="transition ease-in duration-200 origin-top-right"
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                         class="absolute md:block hidden bg-slate-100 top-11 right-0 rounded-md z-10 w-44 border shadow-lg">
-                        <ul class="text-body p-2 text-sm font-medium">
+                        <ul class="text-body p-2 text-sm font-medium nav-list">
                             <li class="hover:bg-gray-200">
-                                <a href="/" class="inline-flex w-full items-center rounded p-2">Your Profile</a>
+                                <a href="/dashboard" class="inline-flex w-full items-center rounded p-2">My Dashboard</a>
                             </li>
                             <li class="hover:bg-gray-200">
-                                <a href="/about" class="inline-flex w-full items-center rounded p-2">Settings</a>
+                                <a href="/profile" class="inline-flex w-full items-center rounded p-2">My Profile</a>
                             </li>
                             <hr class="h-2 text-gray-300">
                             <li class="hover:bg-gray-200 rounded-md">
-                                <form action="/sign-out" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="cursor-pointer inline-flex w-full items-center rounded p-2">Sign Out</button>
-                                </form>
+                                <x-navbar.sign-out-button />
                             </li>
                         </ul>
                     </div>
                 </div>
                 {{-- Login --}}
             @else
-                <a href="/sign-in" class="text-sm/6 sm:block hidden font-semibold">Sign in <span
-                        aria-hidden="true">&rarr;</span></a>
+                <a href="/sign-in" class="sm:inline-flex items-center hidden font-semibold group text-sm">Sign in <span
+                        class="group-hover:translate-x-1 inline-block transition ml-1" aria-hidden="true">&rarr;</span></a>
             @endauth
         </div>
 

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
-
+@import "trix";
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
@@ -54,4 +54,26 @@
 
 body {
     @apply font-inter;
+}
+
+/* Hidden attach file */
+trix-toolbar [data-trix-button-group="file-tools"] {
+    @apply hidden;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+ol {
+    @apply list-decimal list-inside;
+}
+
+ul {
+    @apply list-disc list-inside;
+}
+
+ol.nav-list,
+ul.nav-list {
+    @apply list-none;
 }

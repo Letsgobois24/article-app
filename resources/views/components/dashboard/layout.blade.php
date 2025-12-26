@@ -10,17 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
         rel="stylesheet" />
-    {{-- <script src="//unpkg.com/alpinejs" defer></script> --}}
     <title>Halaman Home</title>
 </head>
 
-<body class="h-[200vh]">
+<body class="min-h-screen" x-data="{ sidebarOpen: !window.matchMedia('(max-width: 639px)').matches }">
     {{-- @yield('content') --}}
-    <x-dashboard.sidebar />
     <x-dashboard.header />
-    <main class="bg-gray-100 p-4 sm:px-6 lg:px-8">
-        {{ $slot }}
-    </main>
+    <div class="flex h-full">
+        <x-dashboard.sidebar />
+        <main class="bg-gray-100 p-4 sm:px-6 lg:px-8 w-full h-full" :class="{ 'sm:ml-64 ml-0': sidebarOpen }">
+            {{ $slot }}
+        </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 </body>
 

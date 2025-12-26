@@ -11,8 +11,13 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'title', 'author', 'body'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $with = ['author', 'category'];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function author(): BelongsTo
     {

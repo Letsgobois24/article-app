@@ -1,17 +1,12 @@
-<nav class="bg-gray-900 z-50 text-gray-100 h-nav">
+<nav class="top-0 right-0 left-0 bg-gray-900 z-10 text-gray-100">
     {{-- Ketika layar medium --}}
-    <div class="flex items-center justify-between px-5 lg:px-8">
+    <div class="flex items-center justify-between py-5">
         {{-- Logo --}}
-        <x-dashboard.side-button />
-
-        <div class="flex md:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
-                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt=""
-                    class="h-8 w-auto" />
-            </a>
+        <div class="flex justify-between items-center px-5 w-64">
+            <div class="font-bold text-2xl">Artikelku</div>
+            <x-dashboard.side-button />
         </div>
 
-        <a href="/sign-out" class="text-sm/6 font-semibold">Sign Out <span aria-hidden="true">&rarr;</span></a>
+        <x-navbar.sign-out-button />
     </div>
 </nav>

@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Middleware\IsAdmin;
 use App\Models\Post;
-use App\Models\User;
-use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,7 +34,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.index');
 })->middleware('auth');
 
 // Authentication
@@ -43,3 +44,6 @@ Route::post('/sign-out', [SignInController::class, 'signOut']);
 
 Route::get('/sign-up', [SignUpController::class, 'index'])->middleware('guest');
 Route::post('/sign-up', [SignUpController::class, 'store']);
+
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware(IsAdmin::class);

@@ -17,7 +17,9 @@
 <body class="h-screen">
     @yield('content')
     <x-navbar.main />
-    <x-header>{{ $title }}</x-header>
+    <header class="px-4 sm:px-6 lg:px-8">
+        <x-title>{{ $title }}</x-title>
+    </header>
     <main class="bg-gray-100 p-4 sm:px-6 lg:px-8">
         {{ $slot }}
     </main>
