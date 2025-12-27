@@ -58,7 +58,7 @@
             </p>
         </div>
 
-        <div x-data="imagePreview(@js(asset('storage/' . $post->image)))" class="col-span-full">
+        <div x-data="imagePreview(@js($post->image ? asset('storage/' . $post->image) : null))" class="col-span-full">
             <img x-show="imageUrl" :src="imageUrl" class="mb-3 mx-auto max-w-xl object-cover max-h-96">
             <label class="block mb-2.5 text-sm font-medium text-heading" for="image">Post Image</label>
             <input @change="previewImage" name="image" id="image" type="file" accept="image/*"
