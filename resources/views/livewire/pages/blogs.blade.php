@@ -1,4 +1,4 @@
-<x-layout>
+<div>
     <x-slot:title>{{ $title }}</x-slot:title>
     {{-- Search Input --}}
     <x-search-form />
@@ -21,5 +21,4 @@
         </div>
         {{ $posts->links() }}
     </section>
-
-</x-layout>
+</div>

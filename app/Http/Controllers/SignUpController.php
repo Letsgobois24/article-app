@@ -24,11 +24,6 @@ class SignUpController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('status', [
-            'theme' => 'success',
-            'message' => 'New post has been added!'
-        ]);
-
         return redirect('/sign-in')->with('status', [
             'theme' => 'success',
             'message' => 'Registration Successful. Please login!'

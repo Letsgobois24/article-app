@@ -57,8 +57,10 @@
                 </div>
                 {{-- Login --}}
             @else
-                <a href="/sign-in" class="sm:inline-flex items-center hidden font-semibold group text-sm">Sign in <span
-                        class="group-hover:translate-x-1 inline-block transition ml-1" aria-hidden="true">&rarr;</span></a>
+                <a wire:navigate.hover href="/sign-in"
+                    class="sm:inline-flex items-center hidden font-semibold group text-sm">Sign
+                    in <span class="group-hover:translate-x-1 inline-block transition ml-1"
+                        aria-hidden="true">&rarr;</span></a>
             @endauth
         </div>
 
@@ -131,7 +133,7 @@
                                 Out</button>
                         </form>
                     @else
-                        <a href="/sign-in"
+                        <a wire:navigate.hover.hover href="/sign-in"
                             class="text-gray-900 hover:bg-gray-50 -mx-3 block rounded-lg px-3 py-2 font-semibold">Sign
                             In</a>
                     @endauth

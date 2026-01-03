@@ -1,4 +1,4 @@
-<x-layout>
+<div>
     <x-slot:title>{{ $title }}</x-slot:title>
     <section class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
         <div class="px-6 mx-auto max-w-7xl ">
@@ -26,10 +26,7 @@
                         </address>
                     </a>
                 </header>
-                <a href="/blogs?category={{ $post->category->slug }}"
-                    class="bg-{{ $post->category->color }}-100 text-{{ $post->category->color }}-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                    {{ $post->category->name }}
-                </a>
+                <x-ui.category-badge :post="$post" />
 
                 {{-- Post Body --}}
                 {{-- Title --}}
@@ -48,4 +45,4 @@
         </div>
     </section>
 
-</x-layout>
+</div>

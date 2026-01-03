@@ -1,0 +1,16 @@
+<div>
+    <form wire:submit.prevent='store' class="space-y-3">
+        @csrf
+        <x-form.input type="email" name="email" placeholder="Your email" label="Email Address" />
+        <x-form.input type="text" name="name" placeholder="Your name" label="Name" />
+        <x-form.input type="text" name="username" placeholder="Your username" label="Username" />
+        <x-form.input type="password" name="password" placeholder="••••••••" label="Password" />
+        <x-form.input type="password" name="password_confirmation" placeholder="••••••••" label="Confirm Password" />
+
+        <x-ui.submit-button target="store">Create</x-ui.submit-button>
+    </form>
+    <p class="mt-10 text-center text-sm/6 text-gray-500">
+        Already have an account?
+        <a wire:navigate.hover href="/sign-in" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign In</a>
+    </p>
+</div>

@@ -3,13 +3,10 @@
 <article
     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col">
     <div class="flex justify-between items-center mb-5 text-gray-500">
-        <a href="/blogs?category={{ $post->category->slug }}"
-            class="bg-{{ $post->category->color }}-100 text-{{ $post->category->color }}-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-            {{ $post->category->name }}
-        </a>
+        <x-ui.category-badge :post="$post" />
         <span class="text-sm">{{ $post->created_at->diffForHumans() }}</span>
     </div>
-    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:underline"><a
+    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:underline"><a wire:navigate
             href="/blog/{{ $post->slug }}">{{ $post->title }}</a></h2>
 
     {{-- Body --}}
@@ -18,7 +15,7 @@
     </div>
 
     {{-- Author Profile --}}
-    <a href="/blogs?author={{ $post->author->username }}">
+    <a wire:navigate href="/blogs?author={{ $post->author->username }}">
         <div class="flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <img class="w-7 h-7 rounded-full" src="{{ asset('img/person-logo.png') }}"
@@ -27,7 +24,7 @@
                     {{ Str::limit($post->author->name, 18) }}
                 </span>
             </div>
-            <a href="/blog/{{ $post['slug'] }}"
+            <a wire:navigate href="/blog/{{ $post['slug'] }}"
                 class="group inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
                 Read more
                 <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition" fill="currentColor" viewBox="0 0 20 20"
