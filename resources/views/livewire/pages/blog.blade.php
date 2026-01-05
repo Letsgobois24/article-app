@@ -4,11 +4,11 @@
         <div class="px-6 mx-auto max-w-7xl ">
             <article
                 class="mx-auto w-full max-w-5xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-                <a href="/blogs" class="text-blue-600 font-medium group hover:text-blue-700 ml-1"><span
+                <a wire:navigate href="/blogs" class="text-blue-600 font-medium group hover:text-blue-700 ml-1"><span
                         class="group-hover:-translate-x-1 inline-block transition mr-1">&laquo;</span>Back to blogs
                 </a>
                 <header class="my-4 lg:mb-6 not-format">
-                    <a href="/blogs?author={{ $post->author->username }}" rel="author">
+                    <a wire:navigate href="/blogs?author={{ $post->author->username }}" rel="author">
                         <address class="flex items-center mb-6 not-italic">
                             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                 <img class="mr-4 w-16 h-16 rounded-full" src="{{ asset('img/person-logo.png') }}"
