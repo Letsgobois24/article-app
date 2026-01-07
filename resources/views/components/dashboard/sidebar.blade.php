@@ -7,9 +7,9 @@
     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full">
     <div
         class="overflow-y-auto px-3 h-full flex flex-col bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="py-5 px-2 flex justify-between items-center">
-            <div class="text-gray-900 font-bold text-2xl">Artikelku</div>
+        <div class="py-5 px-2 flex items-center">
             <x-dashboard.side-button />
+            <span class="text-gray-900 font-bold text-2xl ml-4">Artikelku</span>
         </div>
 
         {{-- Sidelink --}}

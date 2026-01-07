@@ -1,2 +1,2 @@
 ="/blog"
-                                cla
+cla
