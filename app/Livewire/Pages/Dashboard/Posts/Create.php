@@ -33,7 +33,7 @@ class Create extends Component
     {
         return view('livewire.pages.dashboard.posts.save', [
             'categories' => Category::all(['id', 'name']),
-            'isEdit' => false
+            'isEdit' => false,
         ])->layoutData(['title' => 'Create Post']);
     }
 

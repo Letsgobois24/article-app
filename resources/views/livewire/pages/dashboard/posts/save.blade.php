@@ -78,7 +78,6 @@
             <label for="body" class="block text-sm/6 font-medium text-gray-900">Body</label>
             <input wire:model='body' class="post-body" id="body" type="hidden" name="body">
             <trix-editor input="body" x-data x-init="$nextTick(() => {
-                console.log($el);
                 const editor = $el.editor;
                 editor.loadHTML(@js($body));
             })"
@@ -100,7 +99,7 @@
 <script>
     function imagePreview() {
         return {
-            imageUrl: @js($imgUrl ? asset('storage/' . $imgUrl) : null),
+            imageUrl: @js(isset($imgUrl) ? asset('storage/' . $imgUrl) : null),
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {

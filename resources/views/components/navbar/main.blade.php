@@ -35,7 +35,7 @@
                     </svg>
 
                     <!-- Dropdown menu -->
-                    <div x-show="isOpen" x-on:click.outside="isOpen = false"
+                    <div x-show="isOpen" x-on:click.outside="isOpen = false" x-cloak
                         x-transition:enter="transition ease-out duration-200 origin-top-right"
                         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                         x-transition:leave="transition ease-in duration-200 origin-top-right"
