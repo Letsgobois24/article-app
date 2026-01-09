@@ -51,9 +51,8 @@
                             {{ $post->category->name }}
                         </td>
                         <td class="px-6 py-4">
-                            <x-dashboard.dropdown-action href="/dashboard/posts" :post="$post" />
+                            <x-dashboard.dropdown-action :id="$post->id" :slug="$post->slug" href="/dashboard/posts" />
                         </td>
-
                     </tr>
                 @endforeach
             </tbody>

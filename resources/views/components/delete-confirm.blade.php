@@ -1,6 +1,8 @@
+@props(['id', 'buttonClass'])
+
 <section x-data="{ isDeleteModal: false }">
     {{-- Button Slot --}}
-    <button @click="isDeleteModal=true" class="{{ $class }}">
+    <button @click="isDeleteModal=true" class="{{ $buttonClass }}">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
             <path fill="currentColor"
                 d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z" />
@@ -28,13 +30,14 @@
                             d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
                     <h3 class="mb-6 text-body">Are you sure you want to delete this?</h3>
-                    <div class="flex items-center space-x-4 justify-center">
-                        <button wire:click='destroy' wire:loading.remove wire:target='destroy' type="button"
+                    <div x-data="{ isLoading: false }" class="flex items-center space-x-4 justify-center">
+                        <button x-on:click="$dispatch('delete-confirm', { id:'{{ $id }}'}); isLoading=true"
+                            x-show="!isLoading" type="button"
                             class="cursor-pointer text-white bg-red-600 box-border border border-transparent hover:bg-red-700 focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-base text-sm self-stretch w-30 focus:outline-none">
                             Yes, I'm sure
                         </button>
                         {{-- Loading --}}
-                        <button wire:loading wire:target='destroy'
+                        <button x-show="isLoading"
                             class="text-white bg-red-400 box-border border border-transparent shadow-xs font-medium leading-5 rounded-base text-sm w-30 self-stretch focus:outline-none">
                             <div
                                 class="w-4 h-4 border-2 mx-auto border-gray-300 border-t-blue-600 rounded-full animate-spin">

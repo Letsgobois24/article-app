@@ -1,4 +1,4 @@
-@props(['post', 'href'])
+@props(['slug', 'id', 'href'])
 
 <div class="relative flex justify-center" x-data="{ isDropdown: false }" x-on:click.outside="isDropdown = false">
     <button @click="isDropdown = !isDropdown"
@@ -13,7 +13,7 @@
         class="absolute z-20 mt-2 w-36 rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-lg border border-gray-200">
 
         <!-- Show -->
-        <a wire:navigate href="{{ $href . '/' . $post->slug }}"
+        <a wire:navigate href="{{ $href . '/' . $slug }}"
             class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                 <path fill="currentColor"
@@ -25,7 +25,7 @@
         <hr class="border-gray-200">
 
         <!-- Edit -->
-        <a wire:navigate href="{{ $href . '/' . $post->slug }}/edit"
+        <a wire:navigate href="{{ $href . '/' . $slug }}/edit"
             class="flex items-center gap-2 px-4 py-2 text-sm 
                        text-blue-600 dark:text-blue-400
                        hover:bg-blue-50 dark:hover:bg-gray-700 transition">
@@ -38,7 +38,10 @@
         <hr class="border-gray-200">
 
         {{-- Delete --}}
-        <livewire:components.delete-confirm :post="$post"
-            class="w-full cursor-pointer flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition" />
+        <x-delete-confirm :id="$id"
+            buttonClass="w-full cursor-pointer flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition" />
+
+        {{-- <livewire:components.delete-confirm :slug="$slug"
+            class="w-full cursor-pointer flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition" /> --}}
     </div>
 </div>

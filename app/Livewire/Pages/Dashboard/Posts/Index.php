@@ -29,13 +29,16 @@ class Index extends Component
         ])->layoutData(['title' => 'Posts Dashboard']);
     }
 
-    public function destroy(Post $post)
+    #[On('delete-confirm')]
+    public function destroy($id)
     {
+        $post = Post::find($id, ['image']);
+
         if ($post->image) {
             Storage::delete($post->image);
         }
 
-        Post::destroy($post->id);
+        Post::destroy($id);
 
         session()->flash('status', [
             'theme' => 'success',
