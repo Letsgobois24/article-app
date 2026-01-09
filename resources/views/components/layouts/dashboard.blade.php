@@ -22,6 +22,12 @@
             {{ $slot }}
         </main>
     </div>
+
+    {{-- Toaster --}}
+    @if (session('status'))
+        <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
+    @endif
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 </body>
 
