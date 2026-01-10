@@ -1,8 +1,7 @@
-@props(['type' => 'text', 'name', 'placeholder', 'label'])
+@props(['type' => 'text', 'name', 'placeholder' => '', 'label', 'class' => ''])
 
-<div>
-    <label for="{{ $name }}"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $label }}</label>
+<div class="{{ $class }}">
+    <label for="{{ $name }}" class="block mb-2 text-sm font-medium text-gray-900">{{ $label }}</label>
     <input wire:model="{{ $name }}" type="{{ $type }}" name="{{ $name }}" id="{{ $name }}"
         autocomplete="{{ $name }}"
         class=" 

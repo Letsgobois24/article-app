@@ -1,0 +1,7 @@
+@props(['label'])
+
+<div>
+    <label class="block mb-2 text-sm font-medium text-gray-900">{{ $label }}</label>
+    <input disabled class="bg-gray-200 border border-gray-300 rounded-lg block w-full p-2.5 mb-4 sm:text-sm/6">
+    </input>
+</div>

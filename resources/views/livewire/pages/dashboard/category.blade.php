@@ -47,7 +47,7 @@
                             {{ $category->color }}
                         </td>
                         <td class="px-6 py-4">
-                            <x-dashboard.dropdown-action href="/dashboard/categories" :slug="$category->slug" />
+                            <x-dashboard.category-dropdown :category="$category" />
                         </td>
 
                     </tr>

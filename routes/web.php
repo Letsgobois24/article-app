@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminCategoryController;
 use App\Http\Middleware\IsAdmin;
 use App\Livewire\Pages\About;
 use App\Livewire\Pages\Blog;
 use App\Livewire\Pages\Blogs;
 use App\Livewire\Pages\Contact;
+use App\Livewire\Pages\Dashboard\Category as DashboardCategory;
 use App\Livewire\Pages\Dashboard\Home as DashboardHome;
 use App\Livewire\Pages\Dashboard\Posts\Create as CreatePost;
 use App\Livewire\Pages\Dashboard\Posts\Edit as EditPost;
@@ -32,5 +32,6 @@ Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth');
 Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('auth');
 Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
 
+Route::get('/dashboard/categories', DashboardCategory::class)->middleware(IsAdmin::class)->name('categories-dashboard');
 // Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware(IsAdmin::class);
+// Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware(IsAdmin::class);

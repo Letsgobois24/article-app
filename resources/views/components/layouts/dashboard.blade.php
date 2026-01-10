@@ -13,12 +13,11 @@
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 
-<body class="min-h-screen" x-data="{ sidebarOpen: !window.matchMedia('(max-width: 639px)').matches }">
-    {{-- @yield('content') --}}
+<body class="h-screen flex flex-col" x-data="{ sidebarOpen: !window.matchMedia('(max-width: 639px)').matches }">
     <x-dashboard.header />
     <div class="flex h-full">
         <x-dashboard.sidebar />
-        <main class="bg-gray-100 p-4 sm:px-6 lg:px-8 w-full h-full" :class="{ 'sm:ml-64 ml-0': sidebarOpen }">
+        <main class="bg-gray-100 p-4 flex-1 sm:px-6 lg:px-8 w-full h-full" :class="{ 'sm:ml-64 ml-0': sidebarOpen }">
             {{ $slot }}
         </main>
     </div>
