@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Dashboard;
 use App\Models\Category as ModelsCategory;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
@@ -63,6 +64,22 @@ class Category extends Component
         ]);
 
         // Redirect back
+        return $this->redirect(
+            route('categories-dashboard'),
+            navigate: true
+        );
+    }
+
+    #[On('delete-confirm')]
+    public function destroy($id)
+    {
+        ModelsCategory::destroy($id);
+
+        session()->flash('status', [
+            'theme' => 'success',
+            'message' => 'Category has been deleted succesfully'
+        ]);
+
         return $this->redirect(
             route('categories-dashboard'),
             navigate: true
