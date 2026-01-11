@@ -1,3 +1,5 @@
+@props(['title'])
+
 <div x-data="{ isOpen: false }">
     <button class="w-full cursor-pointer" x-on:click="isOpen=true">
         {{ $button }}
@@ -13,7 +15,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                     <h3 class="text-lg font-medium text-heading">
-                        Edit Category
+                        {{ $title }}
                     </h3>
                     <button @click="isOpen=false" type="button"
                         class="cursor-pointer text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center">

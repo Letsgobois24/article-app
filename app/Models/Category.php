@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['slug', 'category'];
+    protected $fillable = ['name', 'slug', 'color'];
     public $timestamps = false;
 
     public function posts(): HasMany
