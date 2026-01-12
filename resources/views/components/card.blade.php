@@ -38,5 +38,3 @@
     </a>
 
 </article>
-
-<script></script>

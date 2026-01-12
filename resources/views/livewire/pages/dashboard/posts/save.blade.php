@@ -1,59 +1,14 @@
 <div>
     <x-title>{{ $isEdit ? 'Edit Post' : 'Create New Post' }}</x-title>
-    <form wire:submit.prevent='save' class="max-w-5xl grid md:grid-cols-2 gap-x-4 gap-y-1" x-data="{ title: @entangle('title'), slug: @entangle('slug') }">
+    <form wire:submit.prevent='save' class="max-w-full grid md:grid-cols-2 gap-x-4 gap-y-2 pb-4" x-data="{ title: @entangle('title'), slug: @entangle('slug') }">
         @csrf
         {{-- Title --}}
-        <div class="col-span-full">
-            <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
-            <input wire:model='title' id="title" type="text" name="title" autofocus
-                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
-            <p class="text-xs text-red-600 mt-1 h-4">
-                @error('title')
-                    {{ $message }}
-                @enderror
-            </p>
-        </div>
+        <x-form.input name="title" label="Title" :autofocus='true' type='text' class='col-span-full' />
         {{-- Slug --}}
-        <div>
-            <label for="slug" class="block text-sm/6 font-medium text-gray-900">Slug</label>
-            <div>
-                <div class="flex">
-                    <input wire:model="slug" x-on:focus="!slug ? slug=slugify(title) : false" id="slug"
-                        type="text" name="slug"
-                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
-                    <button x-on:click="slug=slugify(title)" type="button"
-                        class="cursor-pointer p-2.5 ml-2 rounded-lg border border-gray-300 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <x-icons.auto-text size='20' />
-                    </button>
-                </div>
-                <p class="text-xs text-red-600 mt-1 h-4">
-                    @error('slug')
-                        {{ $message }}
-                    @enderror
-                </p>
-
-            </div>
-        </div>
+        <x-form.slug-input target='slug' from='title' label='Slug' />
         {{-- Category --}}
-        <div>
-            <label for="category_id" class="block text-sm/6 font-medium text-gray-900">Category_id</label>
-            <select id="category_id" name="category_id" wire:model='category_id'
-                class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                <option value="" selected>
-                    Choose Category
-                </option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-            <p class="text-xs text-red-600 mt-1 h-4">
-                @error('category_id')
-                    {{ $message }}
-                @enderror
-            </p>
-        </div>
+        <x-form.select-input :data="$categories" option="name" name="category_id" label="Category"
+            empty="Choose category" />
 
         {{-- Post Image --}}
         <div x-data="imagePreview()" class="col-span-full">
@@ -62,10 +17,11 @@
             <input @change="previewImage" wire:model='image' name="image" id="image" type="file"
                 accept="image/*"
                 class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body">
-            <p class="mt-1 text-sm text-gray-500">JPG, JPEG, PNG, BMP, GIF, or WEBP (MAX. 1 MB).</p>
-            <p class="text-xs text-red-600 h-4">
+            <p class="@error('image') text-xs text-red-600 @else text-sm text-gray-500 @enderror mt-0.5 h-4">
                 @error('image')
                     {{ $message }}
+                @else
+                    JPG, JPEG, PNG, BMP, GIF, or WEBP (MAX. 1 MB).
                 @enderror
             </p>
         </div>
@@ -79,19 +35,18 @@
                 editor.loadHTML(@js($body));
             })"
                 x-on:trix-change="$wire.set('body', $event.target.value)"></trix-editor>
-            <p class="text-xs text-red-600 mt-1 h-4">
-                @error('body')
-                    {{ $message }}
-                @enderror
-            </p>
         </div>
+        <p class="text-xs text-red-600 h-4">
+            @error('body')
+                {{ $message }}
+            @enderror
+        </p>
 
         {{-- Submit --}}
-        <x-ui.submit-button target="save" class="col-span-full">Create New Post</x-ui.submit-button>
+        <x-ui.submit-button target="save" class="col-span-full">{{ $isEdit ? 'Edit' : 'Create New' }}
+            Post</x-ui.submit-button>
     </form>
 </div>
-
-<script src="{{ asset('js/slugify.js') }}"></script>
 
 <script>
     function imagePreview() {

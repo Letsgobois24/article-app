@@ -8,13 +8,13 @@
             class=" 
                 @error($target) ring-danger border-danger 
                 @else border-gray-300 focus:ring-primary-600 focus:border-primary-600 
-                @enderror bg-gray-50 border text-gray-900 rounded-lg block w-full p-2.5 sm:text-sm/6" />
+                @enderror bg-gray-50 border text-gray-900 rounded-lg block w-full p-3 sm:text-sm/6" />
         <button x-on:click="target=slugify(from)" type="button"
-            class="cursor-pointer p-2.5 ml-2 rounded-lg border border-gray-300 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <x-icons.auto-text size='20' />
+            class="cursor-pointer p-3 ml-2 rounded-lg border border-gray-300 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900 active:scale-95 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <x-icons.auto-text size='22' />
         </button>
     </div>
-    <p class="h-4 text-xs text-fg-danger-strong">
+    <p class="text-xs text-red-600 mt-0.5 h-4">
         @error($target)
             {{ $message }}
         @enderror

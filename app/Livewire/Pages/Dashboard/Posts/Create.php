@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -23,11 +24,12 @@ class Create extends Component
     #[Validate(['required'])]
     public $category_id = null;
 
+    #[Validate(['required'])]
+    public $body = '';
+
     #[Validate('image|file|max:2048')]
     public $image = null;
 
-    #[Validate(['required'])]
-    public $body = '';
 
     public function render()
     {

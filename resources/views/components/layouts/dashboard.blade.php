@@ -13,7 +13,7 @@
     <title>{{ $title ?? 'Page Title' }}</title>
 </head>
 
-<body class="h-screen flex flex-col" x-data="{ sidebarOpen: !window.matchMedia('(max-width: 639px)').matches }">
+<body class="min-h-screen flex flex-col" x-data="{ sidebarOpen: !window.matchMedia('(max-width: 639px)').matches }">
     <x-dashboard.header />
     <div class="flex h-full">
         <x-dashboard.sidebar />
@@ -27,7 +27,7 @@
         <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
     @endif
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script> --}}
 </body>
 
 <script src="{{ asset('js/slugify.js') }}"></script>

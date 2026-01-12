@@ -5,7 +5,8 @@
         {{ $slot }}
     </x-slot:button>
     {{-- Loading --}}
-    <div class="pt-4 md:pt-6 w-full" wire:loading wire:target="{{ $isEdit ? 'showEditModal' : 'resetForm' }}">
+    <div class="pt-4 md:pt-6 w-full flex flex-col space-y-2" wire:loading
+        wire:target="{{ $isEdit ? 'showEditModal' : 'resetForm' }}">
         <x-form.skeleton-input label="Category Name" />
         <x-form.skeleton-input label="Slug" />
         <x-form.skeleton-input label="Color" />
@@ -17,7 +18,7 @@
     </div>
 
     {{-- After Loading --}}
-    <form wire:submit.prevent='save' class="pt-4 md:pt-6" wire:loading.remove
+    <form wire:submit.prevent='save' class="pt-4 md:pt-6 flex flex-col space-y-2" wire:loading.remove
         wire:target="{{ $isEdit ? 'showEditModal' : 'resetForm' }}" x-data="{ name: @entangle('name'), slug: @entangle('slug') }">
         <x-form.input name="name" label="Category Name" />
         <x-form.slug-input from="name" />
