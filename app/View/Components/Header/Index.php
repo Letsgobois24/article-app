@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Navbar;
+namespace App\View\Components\Header;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class main extends Component
+class Index extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class main extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar.main');
+        return view('components.header.index');
     }
 }

@@ -7,6 +7,6 @@
             <div class="font-bold text-2xl ml-4">Artikelku</div>
         </div>
 
-        <x-navbar.sign-out-button />
+        <x-header.sign-out-button />
     </div>
 </nav>

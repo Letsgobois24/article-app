@@ -31,7 +31,7 @@
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 my-4">
             @forelse ($posts as $post)
                 {{-- Card --}}
-                <livewire:components.blog-card wire:key="{{ $post->id }}" :post="$post" />
+                <x-blog-card wire:key="{{ $post->id }}" :post="$post" />
             @empty
                 <div class="col-span-full mx-auto flex flex-col items-center">
                     <h3 class="text-2xl text-gray-600 font-semibold mb-2">Article Not Found

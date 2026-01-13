@@ -32,13 +32,13 @@ class Index extends Component
     #[On('delete-confirm')]
     public function destroy($id)
     {
-        $post = Post::find($id, ['image']);
+        // $post = Post::find($id, ['image']);
 
-        if ($post->image) {
-            Storage::delete($post->image);
-        }
+        // if ($post->image) {
+        //     Storage::delete($post->image);
+        // }
 
-        Post::destroy($id);
+        // Post::destroy($id);
 
         session()->flash('status', [
             'theme' => 'success',

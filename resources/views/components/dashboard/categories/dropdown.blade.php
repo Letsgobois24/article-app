@@ -3,9 +3,7 @@
 <div class="relative flex justify-center" x-data="{ isDropdown: false }" x-on:click.outside="isDropdown = false">
     <button @click="isDropdown = !isDropdown"
         class="cursor-pointer p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" class="text-gray-600">
-            <path fill="currentColor" d="M7.5 12L0 4h15z" />
-        </svg>
+        <x-icons.dropdown size='15' />
     </button>
 
     <!-- Dropdown -->

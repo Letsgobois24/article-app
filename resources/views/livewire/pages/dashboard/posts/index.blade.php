@@ -4,13 +4,10 @@
         <x-title>My Posts</x-title>
         {{-- Create New Post --}}
         <a wire:navigate href="/dashboard/posts/create"
-            class="flex gap-x-1 text-sm items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base px-3.5 py-2.5 focus:outline-none"><svg
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="M17 19.22H5V7h7V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7h-2z" />
-                <path fill="currentColor"
-                    d="M19 2h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V7h3V5h-3zM7 9h8v2H7zm0 3v2h8v-2h-3zm0 3h8v2H7z" />
-            </svg>New Post</a>
+            class="flex gap-x-1 text-sm items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base px-3.5 py-2.5 focus:outline-none">
+            <x-icons.post-add size="24" />
+            New Post
+        </a>
     </div>
 
     {{-- Search --}}
@@ -62,9 +59,4 @@
     <div class="my-2">
         {{ $posts->links() }}
     </div>
-
-    {{-- Toaster --}}
-    @if (session('status'))
-        <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
-    @endif
 </div>
