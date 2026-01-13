@@ -14,6 +14,8 @@ use App\Livewire\Pages\Dashboard\Posts\Show as ShowPost;
 use App\Livewire\Pages\Home;
 use App\Livewire\Pages\SignIn;
 use App\Livewire\Pages\SignUp;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
@@ -25,7 +27,15 @@ Route::get('/contact', Contact::class)->name('contact');
 // Authentication
 Route::get('/sign-in', SignIn::class)->name('login')->middleware('guest');
 Route::get('/sign-up', SignUp::class)->middleware('guest');
+Route::post('/sign-out', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/');
+});
+
 Route::get('/dashboard', DashboardHome::class)->middleware('auth');
+
 
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');
 Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth');

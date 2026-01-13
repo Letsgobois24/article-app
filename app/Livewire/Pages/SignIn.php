@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Pages;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -34,16 +32,5 @@ class SignIn extends Component
         }
 
         session()->flash('status', ['theme' => 'danger', 'message' => 'Invalid email or password!']);
-    }
-
-    public function signOut(Request $request): RedirectResponse
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }

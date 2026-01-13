@@ -49,10 +49,9 @@
                 </div>
                 {{-- Login --}}
             @else
-                <a wire:navigate.hover href="/sign-in"
-                    class="md:inline-flex items-center hidden font-semibold group text-sm">Sign
+                <a href="/sign-in" class="md:inline-flex items-center hidden font-semibold group text-sm">Sign
                     in
-                    <x-icons.arrow size='16' />
+                    <x-icons.arrow size='15' class="group-hover:translate-x-1 inline-block transition ml-1" />
                 </a>
             @endauth
         </div>
