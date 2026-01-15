@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Components;
 
-use App\Models\Category;
+use App\Services\CategoryService;
 use Livewire\Attributes\Modelable;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
@@ -17,8 +17,11 @@ class SearchBlogs extends Component
 
     public function render()
     {
+
+        $categories = CategoryService::cacheAll();
+
         return view('livewire.components.search-blogs', [
-            'categories' => Category::all()
+            'categories' => $categories
         ]);
     }
 }

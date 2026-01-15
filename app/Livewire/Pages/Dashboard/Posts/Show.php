@@ -20,6 +20,6 @@ class Show extends Component
     {
         return view('livewire.pages.dashboard.posts.show', [
             'title' => 'My Post'
-        ]);
+        ])->layoutData(['title' => 'My Post']);
     }
 }

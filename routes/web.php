@@ -14,8 +14,11 @@ use App\Livewire\Pages\Dashboard\Posts\Show as ShowPost;
 use App\Livewire\Pages\Home;
 use App\Livewire\Pages\SignIn;
 use App\Livewire\Pages\SignUp;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Benchmark;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
@@ -36,12 +39,20 @@ Route::post('/sign-out', function (Request $request) {
 
 Route::get('/dashboard', DashboardHome::class)->middleware('auth');
 
-
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');
 Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth');
 Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('auth');
 Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
 
 Route::get('/dashboard/categories', DashboardCategory::class)->middleware(IsAdmin::class)->name('categories-dashboard');
-// Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-// Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware(IsAdmin::class);
+
+Route::get('/removeAll', function () {
+    Cache::flush();
+});
+
+Route::get('/benchmark', function () {
+    return Benchmark::dd([
+        'db' => fn() => Post::all(),
+        'cache' => fn() => Cache::remember('posts', '120', fn() => Post::all())
+    ], 1);
+});

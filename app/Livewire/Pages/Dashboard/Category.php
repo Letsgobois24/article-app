@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Dashboard;
 
 use App\Models\Category as ModelsCategory;
+use App\Services\CategoryService;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -20,18 +21,19 @@ class Category extends Component
     public function render()
     {
         return view('livewire.pages.dashboard.category', [
-
-            'categories' => ModelsCategory::all()
+            'categories' => CategoryService::cacheAll()
         ])->layoutData(['title' => 'Dashboard Categories']);
     }
 
     public function showEditModal($id)
     {
+        $this->reset();
+
         $category = ModelsCategory::find($id);
-        $this->name = $category->name;
-        $this->slug = $category->slug;
-        $this->lastSlug = $category->slug;
-        $this->color = $category->color;
+        $this->name = $category['name'];
+        $this->slug = $category['slug'];
+        $this->lastSlug = $category['slug'];
+        $this->color = $category['color'];
         $this->id = $id;
     }
 
@@ -54,14 +56,14 @@ class Category extends Component
             ModelsCategory::where('id', $this->id)->update($validatedData);
         }
 
-        // Reset Input
-        $this->reset();
-
         // Flash Message
         session()->flash('status', [
             'theme' => 'success',
             'message' => !$this->id ? 'New category has been added!' : 'Category has been updated'
         ]);
+
+        // Reset Input
+        CategoryService::clearCache();
 
         // Redirect back
         return $this->redirect(
@@ -79,6 +81,8 @@ class Category extends Component
             'theme' => 'success',
             'message' => 'Category has been deleted succesfully'
         ]);
+
+        CategoryService::clearCache();
 
         return $this->redirect(
             route('categories-dashboard'),

@@ -3,7 +3,7 @@
 <article
     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col">
     <div class="flex justify-between items-center mb-5 text-gray-500">
-        <x-ui.category-badge :post="$post" click="setCategory('{{ $post->category->slug }}')" />
+        <x-ui.category-badge :category="$post->category" click="setCategory('{{ $post->category->slug }}')" />
         <span class="text-sm">{{ $post->created_at->diffForHumans() }}</span>
     </div>
     <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:underline"><a wire:navigate

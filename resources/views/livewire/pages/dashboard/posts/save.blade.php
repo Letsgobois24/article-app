@@ -51,7 +51,7 @@
 <script>
     function imagePreview() {
         return {
-            imageUrl: @js(isset($imgUrl) ? asset('storage/' . $imgUrl) : null),
+            imageUrl: @js(isset($lastImage) ? asset('storage/' . $lastImage) : null),
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {

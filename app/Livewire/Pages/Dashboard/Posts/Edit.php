@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Pages\Dashboard\Posts;
 
-use App\Models\Category;
 use App\Models\Post;
+use App\Services\CategoryService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
@@ -20,27 +20,27 @@ class Edit extends Component
     public $slug = '';
     public $category_id = null;
     public $image = null;
+    public $lastImage = null;
     public $body = '';
-
-    public $post;
+    public $post_id = null;
 
     public function mount(Post $post)
     {
         $this->title = $post['title'];
         $this->slug = $post['slug'];
         $this->category_id = $post['category_id'];
-        $this->image = null;
+        $this->lastImage = $post['image'] ?? null;
         $this->body = $post['body'];
-
-        $this->post = $post;
+        $this->post_id = $post['id'];
     }
 
     public function render()
     {
+        $categories = CategoryService::cacheAll();
+
         return view('livewire.pages.dashboard.posts.save', [
-            'categories' => Category::all(['id', 'name']),
+            'categories' => $categories,
             'isEdit' => true,
-            'imgUrl' => $this->post->image
         ])
             ->layoutData(['title' => 'Edit Post']);
     }
@@ -49,7 +49,7 @@ class Edit extends Component
     {
         $rules = [
             'title' => ['required', 'max:255'],
-            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($this->slug, 'slug')],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($this->post_id)],
             'category_id' => ['required'],
             'body' => ['required'],
             'image' => 'nullable|image|max:2048'
@@ -58,14 +58,14 @@ class Edit extends Component
         $validatedData = $this->validate($rules);
 
         if ($this->image instanceof TemporaryUploadedFile) {
-            if ($this->post->image) {
-                Storage::delete($this->post->image);
+            if ($this->lastImage) {
+                Storage::delete($this->lastImage);
             }
 
             $validatedData['image'] = $this->image->store('post-images');
         }
 
-        $this->post->update($validatedData);
+        Post::where('id', $this->post_id)->update($validatedData);
 
         session()->flash('status', [
             'theme' => 'success',
