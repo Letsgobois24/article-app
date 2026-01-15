@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Pages;
 
-use App\Models\Category;
 use App\Models\Post;
 use App\Services\CategoryService;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,15 +14,17 @@ class Blogs extends Component
 {
     use WithPagination;
 
+    #[Url]
     public $search = '';
+
+    #[Url]
     public $category = '';
+
+    #[Url]
     public $author = '';
 
     public function render()
     {
-        $this->category = request('category') ?? $this->category;
-        $this->author = request('author') ?? $this->author;
-
         $filter = [
             'search' => $this->search,
             'category' => $this->category,
@@ -37,12 +39,9 @@ class Blogs extends Component
             $posts = $query->paginate(6);
         }
 
-        $categories = CategoryService::cacheAll();
-
         return view('livewire.pages.blogs', [
             'title' => 'Blog',
             'posts' => $posts,
-            'categories' => $categories,
         ]);
     }
 

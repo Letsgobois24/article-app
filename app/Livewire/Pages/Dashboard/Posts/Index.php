@@ -3,9 +3,9 @@
 namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +14,10 @@ class Index extends Component
 {
     use WithPagination;
 
+    #[Url]
     public $search = '';
+
+    #[Url]
     public $category = '';
 
     public function render()

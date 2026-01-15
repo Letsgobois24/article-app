@@ -57,6 +57,6 @@
     </div>
     {{-- Pagination --}}
     <div class="my-2">
-        {{ $posts->links() }}
+        {{ $posts->links(data: ['scrollTo' => false]) }}
     </div>
 </div>

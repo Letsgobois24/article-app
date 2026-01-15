@@ -25,9 +25,9 @@
         @endif
     </section>
 
-    {{-- Posts --}}
+    {{-- Posts Section --}}
     <section class="pb-4 px-2 mx-auto max-w-7xl lg:px-6">
-        {{ $posts->links() }}
+        {{ $posts->links(data: ['scrollTo' => false]) }}
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 my-4">
             @forelse ($posts as $post)
                 {{-- Card --}}
@@ -42,6 +42,6 @@
                 </div>
             @endforelse
         </div>
-        {{ $posts->links() }}
+        {{ $posts->links(data: ['scrollTo' => false]) }}
     </section>
 </div>
