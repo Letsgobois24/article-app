@@ -15,7 +15,8 @@
     </div>
 
     {{-- Author Profile --}}
-    <button wire:click="setAuthor(@js($post->author->username))" class="cursor-pointer flex justify-between items-center">
+    <button wire:click="setAuthor('{{ $post->author->username }}')"
+        class="cursor-pointer flex justify-between items-center">
         <div class="flex items-center space-x-2">
             <img class="w-7 h-7 rounded-full" src="{{ asset('img/person-logo.png') }}"
                 alt="{{ $post->author->name }}" />

@@ -24,4 +24,9 @@ class SearchBlogs extends Component
             'categories' => $categories
         ]);
     }
+
+    public function resetPage()
+    {
+        $this->dispatch('reset-page');
+    }
 }
