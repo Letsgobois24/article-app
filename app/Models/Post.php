@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -50,5 +51,16 @@ class Post extends Model
                 $query->where('username', $author)
             );
         });
+    }
+
+    public function scopeMonthlyStats(Builder $query, int $year)
+    {
+        return $query->select(
+            DB::raw("strftime('%m', created_at) as month"),
+            DB::raw('COUNT(*) as total')
+        )
+            ->whereYear('created_at', $year)
+            ->groupBy('month')
+            ->orderBy('month');
     }
 }

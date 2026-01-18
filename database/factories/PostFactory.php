@@ -20,12 +20,15 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $title = fake()->sentence(rand(3, 5));
+        $time = fake()->dateTimeBetween('-2 years', 'now');
         return [
             'title' => $title,
             'author_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => Str::slug($title),
-            'body' => fake()->sentence(50)
+            'body' => fake()->sentence(50),
+            'created_at' => $time,
+            'updated_at' => $time
         ];
     }
 }
