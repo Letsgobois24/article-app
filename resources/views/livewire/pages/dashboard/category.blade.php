@@ -44,7 +44,9 @@
                         <td class="px-6 py-4">
                             {{ $category->slug }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 flex items-center">
+                            <div class="w-6 h-6 rounded border shadow-sm mr-2"
+                                style="background-color: {{ $category->color }}"></div>
                             {{ $category->color }}
                         </td>
                         <td class="px-6 py-4">
@@ -56,4 +58,5 @@
             </tbody>
         </table>
     </div>
+
 </div>

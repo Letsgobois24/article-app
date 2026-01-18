@@ -14,9 +14,10 @@ class Category extends Component
 {
     public $name = '';
     public $slug = '';
-    public $color;
-    public $id = null;
     public $lastSlug;
+    public $id = null;
+    public $color = '#4A90E2';
+    public $lastColor = '#4A90E2';
 
     public function render()
     {
@@ -31,9 +32,8 @@ class Category extends Component
 
         $category = ModelsCategory::find($id);
         $this->name = $category['name'];
-        $this->slug = $category['slug'];
-        $this->lastSlug = $category['slug'];
-        $this->color = $category['color'];
+        $this->slug = $this->lastSlug = $category['slug'];
+        $this->color = $this->lastColor = $category['color'];
         $this->id = $id;
     }
 
@@ -41,8 +41,8 @@ class Category extends Component
     {
         $rules = [
             'name' => ['required', 'min:3'],
-            'slug' => ['required'],
-            'color' => 'required'
+            'slug' => ['required', Rule::unique('categories', 'slug')],
+            'color' => ['required', Rule::unique('categories', 'color')]
         ];
 
         if (!$this->id) {
@@ -51,7 +51,8 @@ class Category extends Component
             ModelsCategory::create($validatedData);
         } else {
             // Update Category
-            $rules['slug'][] = Rule::unique('categories', 'slug')->ignore($this->lastSlug, 'slug');
+            $rules['slug'][1] = $rules['slug'][1]->ignore($this->lastSlug, 'slug');
+            $rules['color'][1] = $rules['color'][1]->ignore($this->lastColor, 'color');
             $validatedData = $this->validate($rules);
             ModelsCategory::where('id', $this->id)->update($validatedData);
         }

@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {{-- @zinqStyles --}}
+    {{-- @zinqHeadScripts --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,9 +27,10 @@
         <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
     @endif
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script> --}}
+    {{-- @zinqScripts --}}
+    <script src="{{ asset('js/slugify.js') }}"></script>
+    <script src="https://unpkg.com/vanilla-picker@2"></script>
 </body>
 
-<script src="{{ asset('js/slugify.js') }}"></script>
 
 </html>

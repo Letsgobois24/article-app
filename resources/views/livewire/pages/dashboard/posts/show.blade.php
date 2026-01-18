@@ -4,7 +4,7 @@
         <div class="mx-auto max-w-7xl ">
             <article
                 class="mx-auto w-full max-w-5xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-                <div class="flex space-x-2">
+                <div class="flex space-x-2 mb-2">
                     {{-- Back --}}
                     <a wire:navigate href="/dashboard/posts"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium
@@ -25,12 +25,9 @@
                     {{-- Delete --}}
                     <x-delete-confirm :id="$post->id"
                         buttonClass="cursor-pointer inline-flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition" />
-
                 </div>
-                <a href="/blogs?category={{ $post->category->slug }}"
-                    class="bg-{{ $post->category->color }}-100 text-{{ $post->category->color }}-800 text-xs font-medium inline-flex items-center px-2.5 py-1 mt-6 rounded dark:bg-primary-200 dark:text-primary-800">
-                    {{ $post->category->name }}
-                </a>
+
+                <x-ui.category-badge :category="$post->category" />
 
                 {{-- Post Body --}}
                 {{-- Body Title --}}
