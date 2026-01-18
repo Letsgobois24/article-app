@@ -1,15 +1,13 @@
-<div>
-    <x-title>Welcome Back, {{ auth()->user()->username }}</x-title>
-    <canvas wire:ignore id="monthly-chart" x-init="chartInit"></canvas>
-    {{-- <livewire:components.dashboard.home.monthly-graphic lazy /> --}}
-
-</div>
+<section>
+    <canvas wire:ignore id="monthly-chart" x-init="$nextTick(() => chartInit())"></canvas>
+</section>
 
 <script>
     function chartInit() {
         const ctx = document.getElementById('monthly-chart');
         // Data dari laravel
         const monthlyData = @json($data);
+        console.log(monthlyData);
 
         new Chart(ctx, {
             type: 'bar',

@@ -56,6 +56,7 @@ class Post extends Model
     public function scopeMonthlyStats(Builder $query, int $year)
     {
         return $query->select(
+            // DB::raw('MONTH(created_at) as month'), //MySQL
             DB::raw("strftime('%m', created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
