@@ -10,7 +10,8 @@ use Livewire\Component;
 class MonthlyGraphic extends Component
 {
 
-    public $selectedYear = null;
+    public $selectedYear1 = null;
+    public $selectedYear2 = null;
     public $availableYears = null;
 
     public function mount()
@@ -23,29 +24,48 @@ class MonthlyGraphic extends Component
         }
 
         $this->availableYears = $availableYears;
-        $this->selectedYear = $availableYears[0];
+        $this->selectedYear1 = $availableYears[1];
+        $this->selectedYear2 = $availableYears[0];
     }
 
     public function render()
     {
-        $stats = Post::monthlyStats($this->selectedYear, auth()->user()->id)->get();
 
         $chart = (new ColumnChartModel())
-            ->setJsonConfig([
-                'chart' => ['height' => 240],
-            ])
             ->setAnimated(true)
-            ->withoutLegend();
+            ->multiColumn()
+            ->withDataLabels();
+        // ->withLegend();
 
-        for ($month = 0; $month < 12; $month++) {
-            $total = $stats->has($month) ? $stats[$month]->total : 0;
-            $monthName = Carbon::create()->month($month + 1)->translatedFormat('F');
-            $chart->addColumn($monthName, $total, '#60a5fa');
+        $data1 = $this->getMonthlyData($this->selectedYear1);
+        $data2 = $this->getMonthlyData($this->selectedYear2);
+
+        $sameYear = $this->selectedYear1 == $this->selectedYear2;
+        for ($index = 0; $index < 12; $index++) {
+            $monthName = Carbon::create()->month($index + 1)->translatedFormat('F');
+
+            $chart->addSeriesColumn($this->selectedYear1, $monthName, $data1[$index]);
+            if (!$sameYear) {
+                $chart->addSeriesColumn($this->selectedYear2, $monthName, $data2[$index]);
+            }
         }
+
+        // dd($chart->toArray());
 
         return view('livewire.components.dashboard.home.monthly-graphic', [
             'chart' => $chart
         ]);
+    }
+
+    private function getMonthlyData(int $year)
+    {
+        $stats = Post::monthlyStats($year, auth()->user()->id)->get();
+        $data = array_fill(0, 12, 0);
+        foreach ($stats as $stat) {
+            $index = (int)$stat['month'] - 1;
+            $data[$index] = $stat['total'];
+        }
+        return $data;
     }
 
     public function placeholder()
