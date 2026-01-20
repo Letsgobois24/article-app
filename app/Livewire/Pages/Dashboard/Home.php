@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Dashboard;
 
-use App\Models\Post;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -11,21 +11,12 @@ class Home extends Component
 {
     public function render()
     {
-        $stats = Post::monthlyStats(2025)->get();
+        $chart = (new ColumnChartModel())
+            ->setTitle('Post per Bulan')
+            ->addColumn('Jan', 10, '#f6ad55')
+            ->addColumn('Feb', 25, '#fc8181')
+            ->addColumn('Mar', 15, '#90cdf4');
 
-        $data = array_fill(0, 12, 0);
-        foreach ($stats as $stat) {
-            $index = (int)$stat['month'] - 1;
-            $data[$index] = $stat['total'];
-        }
-
-        return view('livewire.pages.dashboard.home', [
-            'data' => $data
-        ])->layoutData(['title' => 'Dashboard Page']);
+        return view('livewire.pages.dashboard.home', ['chart' => $chart])->layoutData(['title' => 'Dashboard Page']);
     }
-
-    // public function render()
-    // {
-    //     return view('livewire.pages.dashboard.home')->layoutData(['title' => 'Dashboard Page']);
-    // }
 }

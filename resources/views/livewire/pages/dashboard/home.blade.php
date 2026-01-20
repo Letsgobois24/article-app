@@ -1,36 +1,4 @@
 <div>
     <x-title>Welcome Back, {{ auth()->user()->username }}</x-title>
-    <canvas wire:ignore id="monthly-chart" x-init="chartInit"></canvas>
-    {{-- <livewire:components.dashboard.home.monthly-graphic lazy /> --}}
-
+    <livewire:components.dashboard.home.monthly-graphic lazy />
 </div>
-
-<script>
-    function chartInit() {
-        const ctx = document.getElementById('monthly-chart');
-        // Data dari laravel
-        const monthlyData = @json($data);
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [
-                    'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-                    'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-                ],
-                datasets: [{
-                    label: 'Jumlah Postingan',
-                    data: monthlyData,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    }
-</script>

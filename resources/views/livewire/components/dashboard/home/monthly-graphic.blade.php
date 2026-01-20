@@ -1,34 +1,13 @@
 <section>
-    <canvas wire:ignore id="monthly-chart" x-init="$nextTick(() => chartInit())"></canvas>
+    <select wire:ignore wire:model.change='selectedYear'>
+        @forelse ($availableYears as $year)
+            <option value="{{ $year['year'] }}">{{ $year['year'] }}</option>
+        @empty
+            <option value="">No post yet</option>
+        @endforelse
+    </select>
+    <div wire:ignore class="bg-white p-4 rounded-lg h-96">
+        <livewire:livewire-column-chart wire:key='monthly-chart-{{ $selectedYear }}' key="{{ $chart->reactiveKey() }}"
+            :column-chart-model="$chart" />
+    </div>
 </section>
-
-<script>
-    function chartInit() {
-        const ctx = document.getElementById('monthly-chart');
-        // Data dari laravel
-        const monthlyData = @json($data);
-        console.log(monthlyData);
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [
-                    'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-                    'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
-                ],
-                datasets: [{
-                    label: 'Jumlah Postingan',
-                    data: monthlyData,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    }
-</script>

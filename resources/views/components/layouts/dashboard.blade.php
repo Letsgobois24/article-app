@@ -25,9 +25,12 @@
         <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
     @endif
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    @livewireScripts
+    {{-- @livewireChartsScripts --}}
     <script src="{{ asset('js/slugify.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 </body>
 
 

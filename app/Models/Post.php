@@ -64,4 +64,12 @@ class Post extends Model
             ->groupBy('month')
             ->orderBy('month');
     }
+
+    public function scopeGetAvailableYears(Builder $query)
+    {
+        $query->selectRaw("strftime('%Y', created_at) as year")
+            ->without(['author', 'category'])
+            ->distinct()
+            ->orderBy('year', 'desc')->pluck('year');
+    }
 }
