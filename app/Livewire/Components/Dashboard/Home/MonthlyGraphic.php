@@ -10,20 +10,29 @@ use Livewire\Component;
 class MonthlyGraphic extends Component
 {
 
-    public $selectedYear = 2025;
+    public $selectedYear = null;
     public $availableYears = null;
 
     public function mount()
     {
-        $this->availableYears = Post::getAvailableYears()->get();
+        $yearsData = Post::getAvailableYears()->get();
+
+        $availableYears = [];
+        foreach ($yearsData as $year) {
+            $availableYears[] = $year['year'];
+        }
+
+        $this->availableYears = $availableYears;
+        $this->selectedYear = $availableYears[0];
     }
 
     public function render()
     {
-        $stats = Post::monthlyStats($this->selectedYear)->get();
+        $stats = Post::monthlyStats($this->selectedYear, auth()->user()->id)->get();
 
         $chart = (new ColumnChartModel())
             ->setJsonConfig([
+                'chart' => ['height' => 384],
                 'title' => [
                     'text' => 'Post per Bulan Tahun ' . $this->selectedYear,
                     'align' => 'center',

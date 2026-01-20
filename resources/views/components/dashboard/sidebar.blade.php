@@ -15,7 +15,7 @@
         {{-- Sidelink --}}
         <ul class="nav-list space-y-2 py-6">
             <li>
-                <x-dashboard.link href="/dashboard">
+                <x-dashboard.link :navigate="false" href="/dashboard">
                     <x-slot:icon>
                         <x-icons.dashboard size='24' />
                     </x-slot:icon>

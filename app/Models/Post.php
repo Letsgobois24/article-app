@@ -53,16 +53,21 @@ class Post extends Model
         });
     }
 
-    public function scopeMonthlyStats(Builder $query, int $year)
+    public function scopeMonthlyStats(Builder $query, int $year, $author_id = null)
     {
-        return $query->select(
+        $query->select(
             // DB::raw('MONTH(created_at) as month'), //MySQL
             DB::raw("strftime('%m', created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
+            ->without(['author', 'category'])
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->orderBy('month');
+
+        $query->when($author_id ?? false, function ($query, $author_id) {
+            $query->where('author_id', $author_id);
+        });
     }
 
     public function scopeGetAvailableYears(Builder $query)
@@ -70,6 +75,6 @@ class Post extends Model
         $query->selectRaw("strftime('%Y', created_at) as year")
             ->without(['author', 'category'])
             ->distinct()
-            ->orderBy('year', 'desc')->pluck('year');
+            ->orderBy('year', 'desc');
     }
 }

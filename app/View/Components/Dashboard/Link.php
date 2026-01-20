@@ -11,9 +11,11 @@ class Link extends Component
 {
     public string $href;
     public bool $active;
+    public bool $navigate;
 
-    public function __construct(string $href, $routeActive = null)
+    public function __construct(string $href, $routeActive = null, $navigate = true)
     {
+        $this->navigate = $navigate;
         $this->href = $href;
         $this->active = request()->is($routeActive ? $routeActive : Str::substr($href, 1));
     }
