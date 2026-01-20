@@ -27,7 +27,7 @@ class PostsSection extends Component
         ];
 
         return view('livewire.components.posts-section', [
-            'posts' => Post::without(['author'])->where('author_id', auth()->user()->id)->filter($filter)->latest()->paginate(5)
+            'posts' => Post::with(['category'])->where('author_id', auth()->user()->id)->filter($filter)->latest()->paginate(5)
         ]);
     }
 

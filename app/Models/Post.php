@@ -13,7 +13,6 @@ class Post extends Model
     use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $with = ['author', 'category'];
 
     public function getRouteKeyName(): string
     {
@@ -60,7 +59,6 @@ class Post extends Model
             DB::raw("strftime('%m', created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
-            ->without(['author', 'category'])
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->orderBy('month');
@@ -73,7 +71,6 @@ class Post extends Model
     public function scopeGetAvailableYears(Builder $query)
     {
         $query->selectRaw("strftime('%Y', created_at) as year")
-            ->without(['author', 'category'])
             ->distinct()
             ->orderBy('year', 'desc');
     }
