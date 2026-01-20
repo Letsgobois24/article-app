@@ -32,15 +32,7 @@ class MonthlyGraphic extends Component
 
         $chart = (new ColumnChartModel())
             ->setJsonConfig([
-                'chart' => ['height' => 384],
-                'title' => [
-                    'text' => 'Post per Bulan Tahun ' . $this->selectedYear,
-                    'align' => 'center',
-                    'style' => [
-                        'fontSize' => '24px',
-                        'fontWeight' => '600',
-                    ],
-                ],
+                'chart' => ['height' => 240],
             ])
             ->setAnimated(true)
             ->withoutLegend();
@@ -58,12 +50,6 @@ class MonthlyGraphic extends Component
 
     public function placeholder()
     {
-        return <<<'HTML'
-        <div class="w-full h-full min-h-48 flex justify-center items-center">
-            <!-- Loading spinner... -->
-            <div class="w-10 h-10 m-auto border-4 mx-auto border-gray-300 border-t-blue-600 rounded-full animate-spin">
-            </div>
-        </div>
-        HTML;
+        return view('components.ui.loading-placeholder');
     }
 }
