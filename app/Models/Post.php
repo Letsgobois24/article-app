@@ -56,11 +56,9 @@ class Post extends Model
     public function scopeMonthlyStats(Builder $query, int $year, $author_id = null)
     {
         $query->select(
-            // DB::raw('MONTH(created_at) as month'), //MySQL
-            DB::raw("strftime('%m', created_at) as month"),
+            DB::raw("EXTRACT(MONTH FROM created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
-            ->without(['author', 'category'])
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->orderBy('month');
@@ -70,11 +68,10 @@ class Post extends Model
         });
     }
 
-    public function scopeGetAvailableYears(Builder $query)
+    public static function getAvailableYears()
     {
-        $query->selectRaw("strftime('%Y', created_at) as year")
-            ->without(['author', 'category'])
-            ->distinct()
-            ->orderBy('year', 'desc');
+        return self::selectRaw("DISTINCT EXTRACT(YEAR FROM created_at) as year")
+            ->orderBy('year', 'desc')
+            ->pluck('year');
     }
 }

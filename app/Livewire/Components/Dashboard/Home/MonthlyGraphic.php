@@ -16,12 +16,7 @@ class MonthlyGraphic extends Component
 
     public function mount()
     {
-        $yearsData = Post::getAvailableYears()->get();
-
-        $availableYears = [];
-        foreach ($yearsData as $year) {
-            $availableYears[] = $year['year'];
-        }
+        $availableYears = Post::getAvailableYears();
 
         $this->availableYears = $availableYears;
         $this->selectedYear1 = $availableYears[1];
@@ -30,12 +25,10 @@ class MonthlyGraphic extends Component
 
     public function render()
     {
-
         $chart = (new ColumnChartModel())
             ->setAnimated(true)
             ->multiColumn()
             ->withDataLabels();
-        // ->withLegend();
 
         $data1 = $this->getMonthlyData($this->selectedYear1);
         $data2 = $this->getMonthlyData($this->selectedYear2);
@@ -49,8 +42,6 @@ class MonthlyGraphic extends Component
                 $chart->addSeriesColumn($this->selectedYear2, $monthName, $data2[$index]);
             }
         }
-
-        // dd($chart->toArray());
 
         return view('livewire.components.dashboard.home.monthly-graphic', [
             'chart' => $chart
