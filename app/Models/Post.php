@@ -74,4 +74,16 @@ class Post extends Model
             ->orderBy('year', 'desc')
             ->pluck('year');
     }
+
+    public static function getPostsCount($period = null)
+    {
+        $query = self::selectRaw("COUNT(*)");
+
+        $query->when($period ?? false, function ($query, $period) {
+            $query->whereRaw("created_at >= date_trunc('$period', now())
+                            AND created_at < date_trunc('$period', now() + INTERVAL '1 $period')");
+        });
+
+        return $query->pluck('count')[0];
+    }
 }

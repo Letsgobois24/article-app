@@ -25,10 +25,14 @@ class MonthlyGraphic extends Component
 
     public function render()
     {
+
         $chart = (new ColumnChartModel())
             ->setAnimated(true)
             ->multiColumn()
-            ->withDataLabels();
+            ->withDataLabels()
+            ->setJsonConfig([
+                'chart' => ['height' => 384],
+            ]);
 
         $data1 = $this->getMonthlyData($this->selectedYear1);
         $data2 = $this->getMonthlyData($this->selectedYear2);
