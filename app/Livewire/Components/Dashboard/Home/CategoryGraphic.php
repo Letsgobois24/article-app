@@ -14,7 +14,10 @@ class CategoryGraphic extends Component
 
         $chart = (new PieChartModel())
             ->setAnimated(true)
-            ->withDataLabels();
+            ->withDataLabels()
+            ->setJsonConfig([
+                'chart' => ['height' => 384],
+            ]);
 
         foreach ($stats as $stat) {
             $chart->addSlice($stat['name'], (int)$stat['posts_count'], $stat['color']);

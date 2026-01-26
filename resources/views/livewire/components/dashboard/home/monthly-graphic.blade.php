@@ -1,6 +1,6 @@
 <div class="bg-white p-6 rounded-2xl w-full h-full border border-gray-100 shadow-sm space-y-4">
     <!-- Header -->
-    <div class="flex justify-between items-start">
+    <div class="flex justify-between gap-x-2">
         <div>
             <h2 class="text-lg font-semibold text-gray-800">
                 Your Posts
@@ -12,9 +12,9 @@
         </div>
 
         <!-- Select -->
-        <div class="space-x-1">
+        <div class="flex md:flex-row flex-col items-center justify-center gap-2">
             <x-form.select-time model="selectedYear1" :data="$availableYears" />
-            <span class="text-gray-700">&</span>
+            <span class="text-gray-700 hidden md:block">&</span>
             <x-form.select-time model="selectedYear2" :data="$availableYears" />
         </div>
     </div>
