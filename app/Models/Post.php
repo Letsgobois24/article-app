@@ -86,4 +86,9 @@ class Post extends Model
 
         return $query->pluck('count')[0];
     }
+
+    public function scopeCategoryCount(Builder $query)
+    {
+        $query->select(['category_id', 'COUNT(*)'])->with('categories')->groupBy('category_id')->count();
+    }
 }
