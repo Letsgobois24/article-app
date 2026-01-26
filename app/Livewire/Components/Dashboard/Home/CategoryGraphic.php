@@ -3,7 +3,6 @@
 namespace App\Livewire\Components\Dashboard\Home;
 
 use App\Models\Category;
-use App\Models\Post;
 use Asantibanez\LivewireCharts\Models\PieChartModel;
 use Livewire\Component;
 
@@ -15,10 +14,7 @@ class CategoryGraphic extends Component
 
         $chart = (new PieChartModel())
             ->setAnimated(true)
-            ->withDataLabels()
-            ->setJsonConfig([
-                'chart' => ['height' => 440],
-            ]);
+            ->withDataLabels();
 
         foreach ($stats as $stat) {
             $chart->addSlice($stat['name'], (int)$stat['posts_count'], $stat['color']);

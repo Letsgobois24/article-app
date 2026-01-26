@@ -5,6 +5,7 @@
         <x-ui.card-stat title="Total Posts" :value="$total_posts_all" />
         <x-ui.card-stat title="This Year" :value="$total_posts_year" />
         <x-ui.card-stat title="This Month" :value="$total_posts_month" />
+        <x-ui.card-stat title="This Month" :value="$total_posts_month" />
 
         {{-- Chart Diagram --}}
         <section class="row-start-2 col-span-3">
@@ -12,7 +13,7 @@
         </section>
 
         {{-- Circle Diagram --}}
-        <section class="row-start-1 row-end-3">
+        <section class="row-start-2 row-end-3">
             <livewire:components.dashboard.home.category-graphic lazy />
         </section>
     </div>

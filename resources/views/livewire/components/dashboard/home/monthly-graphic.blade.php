@@ -1,4 +1,4 @@
-<div class="bg-white p-6 rounded-2xl w-full min-h-96 max-h-full border border-gray-100 shadow-sm space-y-4">
+<div class="bg-white p-6 rounded-2xl w-full h-full border border-gray-100 shadow-sm space-y-4">
     <!-- Header -->
     <div class="flex justify-between items-start">
         <div>
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Chart -->
-    <div class="bg-gray-50 rounded-xl p-3">
+    <div class="bg-gray-50 rounded-xl">
         <livewire:livewire-column-chart key="{{ $chart->reactiveKey() }}" :column-chart-model="$chart" />
     </div>
 </div>

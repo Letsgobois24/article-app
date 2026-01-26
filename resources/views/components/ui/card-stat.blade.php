@@ -1,6 +1,6 @@
 @props(['title', 'value'])
 
-<section class="bg-white p-6 h-32 rounded-2xl border border-gray-100 shadow-sm">
+<section class="bg-white p-6 h-full rounded-2xl border border-gray-100 shadow-sm">
     <p class="text-sm font-medium text-gray-500">
         {{ $title }}
     </p>
