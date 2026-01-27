@@ -16,34 +16,47 @@ class MonthlyGraphic extends Component
 
     public function mount()
     {
-        $availableYears = Post::getAvailableYears();
-
+        $availableYears = Post::getAvailableYears(auth()->user()->id);
         $this->availableYears = $availableYears;
-        $this->selectedYear1 = $availableYears[1];
-        $this->selectedYear2 = $availableYears[0];
+        if (count($availableYears) > 0) {
+            $this->selectedYear2 = $availableYears[0];
+        }
+        if (count($availableYears) > 1) {
+            $this->selectedYear1 = $availableYears[1];
+        }
     }
 
     public function render()
     {
+        $chart = null;
 
-        $chart = (new ColumnChartModel())
-            ->setAnimated(true)
-            ->multiColumn()
-            ->withDataLabels()
-            ->setJsonConfig([
-                'chart' => ['height' => 384],
-            ]);
+        if ($this->selectedYear1 || $this->selectedYear2) {
+            if ($this->selectedYear1) {
+                $data1 = $this->getMonthlyData($this->selectedYear1);
+            }
 
-        $data1 = $this->getMonthlyData($this->selectedYear1);
-        $data2 = $this->getMonthlyData($this->selectedYear2);
+            if ($this->selectedYear2) {
+                $data2 = $this->getMonthlyData($this->selectedYear2);
+            }
 
-        $sameYear = $this->selectedYear1 == $this->selectedYear2;
-        for ($index = 0; $index < 12; $index++) {
-            $monthName = Carbon::create()->month($index + 1)->translatedFormat('F');
+            $sameYear = $this->selectedYear1 == $this->selectedYear2;
 
-            $chart->addSeriesColumn($this->selectedYear1, $monthName, $data1[$index]);
-            if (!$sameYear) {
-                $chart->addSeriesColumn($this->selectedYear2, $monthName, $data2[$index]);
+            $chart = (new ColumnChartModel())
+                ->setAnimated(true)
+                ->multiColumn()
+                ->withDataLabels()
+                ->setJsonConfig([
+                    'chart' => ['height' => 384],
+                ]);
+            for ($index = 0; $index < 12; $index++) {
+                $monthName = Carbon::create()->month($index + 1)->translatedFormat('F');
+
+                if ($this->selectedYear1) {
+                    $chart->addSeriesColumn($this->selectedYear1, $monthName, $data1[$index]);
+                }
+                if (!$sameYear && $this->selectedYear2) {
+                    $chart->addSeriesColumn($this->selectedYear2, $monthName, $data2[$index]);
+                }
             }
         }
 
@@ -55,6 +68,9 @@ class MonthlyGraphic extends Component
     private function getMonthlyData(int $year)
     {
         $stats = Post::monthlyStats($year, auth()->user()->id)->get();
+        if (count($stats) == 0) {
+            return null;
+        }
         $data = array_fill(0, 12, 0);
         foreach ($stats as $stat) {
             $index = (int)$stat['month'] - 1;
@@ -65,6 +81,6 @@ class MonthlyGraphic extends Component
 
     public function placeholder()
     {
-        return view('components.ui.loading-placeholder');
+        return view('components.placeholder.monthly-graphic');
     }
 }

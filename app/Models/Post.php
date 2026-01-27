@@ -68,27 +68,31 @@ class Post extends Model
         });
     }
 
-    public static function getAvailableYears()
+    public static function getAvailableYears($author_id = null)
     {
-        return self::selectRaw("DISTINCT EXTRACT(YEAR FROM created_at) as year")
-            ->orderBy('year', 'desc')
-            ->pluck('year');
+        $query = self::selectRaw("DISTINCT EXTRACT(YEAR FROM created_at) as year")
+            ->orderBy('year', 'desc');
+
+        $query->when($author_id ?? false, function ($query, $author_id) {
+            $query->where('author_id', $author_id);
+        });
+
+        return $query->pluck('year');
     }
 
-    public static function getPostsCount($period = null)
+    public static function getPostsCount($period = null, $author_id = null)
     {
         $query = self::selectRaw("COUNT(*)");
 
-        $query->when($period ?? false, function ($query, $period) {
+        $query->when($author_id ?? false, function ($query) use ($author_id) {
+            $query->where('author_id', $author_id);
+        });
+
+        $query->when($period ?? false, function ($query) use ($period) {
             $query->whereRaw("created_at >= date_trunc('$period', now())
                             AND created_at < date_trunc('$period', now() + INTERVAL '1 $period')");
         });
 
         return $query->pluck('count')[0];
-    }
-
-    public function scopeCategoryCount(Builder $query)
-    {
-        $query->select(['category_id', 'COUNT(*)'])->with('categories')->groupBy('category_id')->count();
     }
 }

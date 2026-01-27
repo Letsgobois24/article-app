@@ -7,20 +7,43 @@
             </h2>
             <p class="text-sm text-gray-500">
                 Statistics for year
-                {{ $selectedYear1 }}{{ $selectedYear2 != $selectedYear1 ? ' & ' . $selectedYear2 : '' }}
+                @if ($selectedYear1 != $selectedYear2 && $selectedYear1)
+                    {{ $selectedYear1 }} & {{ $selectedYear2 }}
+                @else
+                    {{ $selectedYear2 }}
+                @endif
+                {{-- {{ $selectedYear1 != $selectedYear2 ? $selectedYear1 : '' }}{{ $selectedYear2 != $selectedYear1 && $selectedYear1 ? ' & ' . $selectedYear2 : $selectedYear2 }} --}}
             </p>
         </div>
 
         <!-- Select -->
-        <div class="flex md:flex-row flex-col items-center justify-center gap-2">
-            <x-form.select-time model="selectedYear1" :data="$availableYears" />
-            <span class="text-gray-700 hidden md:block">&</span>
-            <x-form.select-time model="selectedYear2" :data="$availableYears" />
-        </div>
+        @if (count($availableYears) > 0)
+            <div class="flex md:flex-row flex-col items-center justify-center gap-2">
+                <x-form.select-time model="selectedYear1" :data="$availableYears" />
+                <span class="text-gray-700 hidden md:block">&</span>
+                <x-form.select-time model="selectedYear2" :data="$availableYears" />
+            </div>
+        @endif
     </div>
 
     <!-- Chart -->
     <div class="bg-gray-50 rounded-xl">
-        <livewire:livewire-column-chart key="{{ $chart->reactiveKey() }}" :column-chart-model="$chart" />
+        @if ($chart)
+            <livewire:livewire-column-chart key="{{ $chart->reactiveKey() }}" :column-chart-model="$chart" />
+        @else
+            <div
+                class="h-80 w-full flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-gray-200 bg-gray-50 text-center">
+                <!-- Icon -->
+                <x-icons.analytic size="40" class="text-gray-400" />
+
+                <!-- Text -->
+                <p class="text-sm font-medium text-gray-600">
+                    No posts yet
+                </p>
+                <p class="text-xs text-gray-400">
+                    Your monthly post statistics will appear here
+                </p>
+            </div>
+        @endif
     </div>
 </div>
