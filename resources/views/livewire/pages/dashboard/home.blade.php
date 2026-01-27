@@ -1,5 +1,4 @@
 <div>
-
     <x-title>Welcome Back, {{ auth()->user()->username }}</x-title>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <x-ui.card-stat title="Total Posts" :value="$total_posts_all" />

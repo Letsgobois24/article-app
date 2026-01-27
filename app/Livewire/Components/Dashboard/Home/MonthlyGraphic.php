@@ -18,12 +18,8 @@ class MonthlyGraphic extends Component
     {
         $availableYears = Post::getAvailableYears(auth()->user()->id);
         $this->availableYears = $availableYears;
-        if (count($availableYears) > 0) {
-            $this->selectedYear2 = $availableYears[0];
-        }
-        if (count($availableYears) > 1) {
-            $this->selectedYear1 = $availableYears[1];
-        }
+        $this->selectedYear2 = $availableYears[0] ?? null;
+        $this->selectedYear1 = $availableYears[1] ?? null;
     }
 
     public function render()
@@ -39,7 +35,6 @@ class MonthlyGraphic extends Component
                 $data2 = $this->getMonthlyData($this->selectedYear2);
             }
 
-            $sameYear = $this->selectedYear1 == $this->selectedYear2;
 
             $chart = (new ColumnChartModel())
                 ->setAnimated(true)
@@ -48,6 +43,7 @@ class MonthlyGraphic extends Component
                 ->setJsonConfig([
                     'chart' => ['height' => 384],
                 ]);
+            $sameYear = $this->selectedYear1 == $this->selectedYear2;
             for ($index = 0; $index < 12; $index++) {
                 $monthName = Carbon::create()->month($index + 1)->translatedFormat('F');
 
