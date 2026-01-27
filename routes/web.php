@@ -45,6 +45,7 @@ Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('au
 Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
 
 Route::get('/dashboard/categories', DashboardCategory::class)->middleware(IsAdmin::class)->name('categories-dashboard');
+Route::get('/admin/dashboard', DashboardHome::class)->middleware(IsAdmin::class)->name('admin-dashboard');
 
 Route::get('/removeAll', function () {
     Cache::flush();
