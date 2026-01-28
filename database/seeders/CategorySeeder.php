@@ -16,25 +16,31 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => "Machine Learning",
             'slug' => "machine-learning",
-            'color' => 'yellow'
+            'color' => '#d0cf49ff'
         ]);
 
         Category::create([
             'name' => "Decision Support System",
             'slug' => "decision-support-system",
-            'color' => 'green'
+            'color' => '#68ef89ff'
         ]);
 
         Category::create([
             'name' => "Big Data",
             'slug' => "big-data",
-            'color' => 'red'
+            'color' => '#ff5000ff'
         ]);
 
         Category::create([
             'name' => "Internet Of Things",
             'slug' => "internet-of-things",
-            'color' => 'gray'
+            'color' => '#61c6dfff'
+        ]);
+
+        Category::create([
+            'name' => "Economics",
+            'slug' => "economics",
+            'color' => '#d4cd00ff'
         ]);
     }
 }
