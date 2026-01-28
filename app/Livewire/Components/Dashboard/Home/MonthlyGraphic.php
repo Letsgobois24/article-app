@@ -14,9 +14,12 @@ class MonthlyGraphic extends Component
     public $selectedYear2 = null;
     public $availableYears = null;
 
-    public function mount()
+    protected $author_id = null;
+
+    public function mount($scope = 'user')
     {
-        $availableYears = Post::getAvailableYears(auth()->user()->id);
+        $this->author_id = $scope === 'user' ? auth()->user()->id : null;
+        $availableYears = Post::getAvailableYears($this->author_id);
         $this->availableYears = $availableYears;
         $this->selectedYear2 = $availableYears[0] ?? null;
         $this->selectedYear1 = $availableYears[1] ?? null;
@@ -63,7 +66,7 @@ class MonthlyGraphic extends Component
 
     private function getMonthlyData(int $year)
     {
-        $stats = Post::monthlyStats($year, auth()->user()->id)->get();
+        $stats = Post::monthlyStats($year, $this->author_id)->get();
         if (count($stats) == 0) {
             return null;
         }
