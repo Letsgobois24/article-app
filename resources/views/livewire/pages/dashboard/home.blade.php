@@ -8,12 +8,12 @@
 
         {{-- Chart Diagram --}}
         <section class="col-span-full lg:col-span-3">
-            <livewire:components.dashboard.home.monthly-graphic lazy />
+            <livewire:components.dashboard.home.monthly-graphic lazy :scope="$scope" />
         </section>
 
         {{-- Circle Diagram --}}
         <section class="col-span-full lg:col-span-1">
-            <livewire:components.dashboard.home.category-graphic lazy />
+            <livewire:components.dashboard.home.category-graphic lazy :scope="$scope" />
         </section>
     </div>
 </div>

@@ -13,8 +13,14 @@ class Home extends Component
     public $selectedYear2 = null;
     public $availableYears = null;
 
-    public function mount()
+    public $scope = 'user';
+    protected $author_id = null;
+
+    public function mount($scope = 'user')
     {
+        $this->scope = $scope;
+        $this->author_id = $scope === 'user' ? auth()->user()->id : null;
+
         $availableYears = Post::getAvailableYears();
 
         $this->availableYears = $availableYears;
@@ -24,13 +30,11 @@ class Home extends Component
 
     public function render()
     {
-        $author_id = auth()->user()->id;
-
         return view('livewire.pages.dashboard.home', [
-            'total_posts_all' => Post::getPostsCount(null, $author_id),
-            'total_posts_year' => Post::getPostsCount('year', $author_id),
-            'total_posts_month' => Post::getPostsCount('month', $author_id),
-            'total_posts_today' => Post::getPostsCount('day', $author_id)
+            'total_posts_all' => Post::getPostsCount(null, $this->author_id),
+            'total_posts_year' => Post::getPostsCount('year', $this->author_id),
+            'total_posts_month' => Post::getPostsCount('month', $this->author_id),
+            'total_posts_today' => Post::getPostsCount('day', $this->author_id)
         ])->layoutData(['title' => 'Dashboard Page']);
     }
 }

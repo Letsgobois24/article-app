@@ -38,6 +38,14 @@
                 <h6 class="text-gray-400 text-sm px-2 mb-2">ADMINISTRATOR</h6>
                 <ul class="nav-list">
                     <li>
+                        <x-dashboard.link :navigate="false" href="/admin/dashboard">
+                            <x-slot:icon>
+                                <x-icons.admin-site size='24' />
+                            </x-slot:icon>
+                            Dashboard
+                        </x-dashboard.link>
+                    </li>
+                    <li>
                         <x-dashboard.link href="/dashboard/categories">
                             <x-slot:icon>
                                 <x-icons.category size='24' />

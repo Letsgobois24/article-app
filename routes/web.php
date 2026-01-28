@@ -37,7 +37,9 @@ Route::post('/sign-out', function (Request $request) {
     return redirect('/');
 });
 
-Route::get('/dashboard', DashboardHome::class)->middleware('auth');
+Route::get('/dashboard', DashboardHome::class)
+    ->defaults('scope', 'user')
+    ->middleware('auth');
 
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');
 Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth');
@@ -45,6 +47,10 @@ Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('au
 Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
 
 Route::get('/dashboard/categories', DashboardCategory::class)->middleware(IsAdmin::class)->name('categories-dashboard');
+Route::get('/admin/dashboard', DashboardHome::class)
+    ->defaults('scope', 'global')
+    ->middleware(IsAdmin::class)
+    ->name('admin.dashboard');
 
 Route::get('/removeAll', function () {
     Cache::flush();

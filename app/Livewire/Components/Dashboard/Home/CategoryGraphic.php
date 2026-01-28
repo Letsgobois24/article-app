@@ -8,9 +8,16 @@ use Livewire\Component;
 
 class CategoryGraphic extends Component
 {
+    protected $author_id = null;
+
+    public function mount($scope = 'user')
+    {
+        $this->author_id = $scope === 'user' ? auth()->user()->id : null;
+    }
+
     public function render()
     {
-        $stats = Category::postsCategoriesCount(auth()->user()->id)->get();
+        $stats = Category::postsCategoriesCount($this->author_id)->get();
         $chart = null;
 
         if (count($stats) > 0) {
