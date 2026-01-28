@@ -10,37 +10,50 @@ use Livewire\Component;
 class MonthlyGraphic extends Component
 {
 
-    public $selectedYear = null;
+    public $selectedYear1 = null;
+    public $selectedYear2 = null;
     public $availableYears = null;
 
     public function mount()
     {
-        $yearsData = Post::getAvailableYears()->get();
-
-        $availableYears = [];
-        foreach ($yearsData as $year) {
-            $availableYears[] = $year['year'];
-        }
-
+        $availableYears = Post::getAvailableYears(auth()->user()->id);
         $this->availableYears = $availableYears;
-        $this->selectedYear = $availableYears[0];
+        $this->selectedYear2 = $availableYears[0] ?? null;
+        $this->selectedYear1 = $availableYears[1] ?? null;
     }
 
     public function render()
     {
-        $stats = Post::monthlyStats($this->selectedYear, auth()->user()->id)->get();
+        $chart = null;
 
-        $chart = (new ColumnChartModel())
-            ->setJsonConfig([
-                'chart' => ['height' => 240],
-            ])
-            ->setAnimated(true)
-            ->withoutLegend();
+        if ($this->selectedYear1 || $this->selectedYear2) {
+            if ($this->selectedYear1) {
+                $data1 = $this->getMonthlyData($this->selectedYear1);
+            }
 
-        for ($month = 0; $month < 12; $month++) {
-            $total = $stats->has($month) ? $stats[$month]->total : 0;
-            $monthName = Carbon::create()->month($month + 1)->translatedFormat('F');
-            $chart->addColumn($monthName, $total, '#60a5fa');
+            if ($this->selectedYear2) {
+                $data2 = $this->getMonthlyData($this->selectedYear2);
+            }
+
+
+            $chart = (new ColumnChartModel())
+                ->setAnimated(true)
+                ->multiColumn()
+                ->withDataLabels()
+                ->setJsonConfig([
+                    'chart' => ['height' => 384],
+                ]);
+            $sameYear = $this->selectedYear1 == $this->selectedYear2;
+            for ($index = 0; $index < 12; $index++) {
+                $monthName = Carbon::create()->month($index + 1)->translatedFormat('F');
+
+                if ($this->selectedYear1) {
+                    $chart->addSeriesColumn($this->selectedYear1, $monthName, $data1[$index]);
+                }
+                if (!$sameYear && $this->selectedYear2) {
+                    $chart->addSeriesColumn($this->selectedYear2, $monthName, $data2[$index]);
+                }
+            }
         }
 
         return view('livewire.components.dashboard.home.monthly-graphic', [
@@ -48,8 +61,22 @@ class MonthlyGraphic extends Component
         ]);
     }
 
+    private function getMonthlyData(int $year)
+    {
+        $stats = Post::monthlyStats($year, auth()->user()->id)->get();
+        if (count($stats) == 0) {
+            return null;
+        }
+        $data = array_fill(0, 12, 0);
+        foreach ($stats as $stat) {
+            $index = (int)$stat['month'] - 1;
+            $data[$index] = $stat['total'];
+        }
+        return $data;
+    }
+
     public function placeholder()
     {
-        return view('components.ui.loading-placeholder');
+        return view('components.placeholder.monthly-graphic');
     }
 }

@@ -55,8 +55,7 @@ class Post extends Model
     public function scopeMonthlyStats(Builder $query, int $year, $author_id = null)
     {
         $query->select(
-            // DB::raw('MONTH(created_at) as month'), //MySQL
-            DB::raw("strftime('%m', created_at) as month"),
+            DB::raw("EXTRACT(MONTH FROM created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
             ->whereYear('created_at', $year)
@@ -68,10 +67,31 @@ class Post extends Model
         });
     }
 
-    public function scopeGetAvailableYears(Builder $query)
+    public static function getAvailableYears($author_id = null)
     {
-        $query->selectRaw("strftime('%Y', created_at) as year")
-            ->distinct()
+        $query = self::selectRaw("DISTINCT EXTRACT(YEAR FROM created_at) as year")
             ->orderBy('year', 'desc');
+
+        $query->when($author_id ?? false, function ($query, $author_id) {
+            $query->where('author_id', $author_id);
+        });
+
+        return $query->pluck('year');
+    }
+
+    public static function getPostsCount($period = null, $author_id = null)
+    {
+        $query = self::selectRaw("COUNT(*)");
+
+        $query->when($author_id ?? false, function ($query) use ($author_id) {
+            $query->where('author_id', $author_id);
+        });
+
+        $query->when($period ?? false, function ($query) use ($period) {
+            $query->whereRaw("created_at >= date_trunc('$period', now())
+                            AND created_at < date_trunc('$period', now() + INTERVAL '1 $period')");
+        });
+
+        return $query->pluck('count')[0];
     }
 }

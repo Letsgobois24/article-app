@@ -2,21 +2,35 @@
 
 namespace App\Livewire\Pages\Dashboard;
 
-use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use App\Models\Post;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
 class Home extends Component
 {
+    public $selectedYear1 = null;
+    public $selectedYear2 = null;
+    public $availableYears = null;
+
+    public function mount()
+    {
+        $availableYears = Post::getAvailableYears();
+
+        $this->availableYears = $availableYears;
+        $this->selectedYear1 = $availableYears[1];
+        $this->selectedYear2 = $availableYears[0];
+    }
+
     public function render()
     {
-        $chart = (new ColumnChartModel())
-            ->setTitle('Post per Bulan')
-            ->addColumn('Jan', 10, '#f6ad55')
-            ->addColumn('Feb', 25, '#fc8181')
-            ->addColumn('Mar', 15, '#90cdf4');
+        $author_id = auth()->user()->id;
 
-        return view('livewire.pages.dashboard.home', ['chart' => $chart])->layoutData(['title' => 'Dashboard Page']);
+        return view('livewire.pages.dashboard.home', [
+            'total_posts_all' => Post::getPostsCount(null, $author_id),
+            'total_posts_year' => Post::getPostsCount('year', $author_id),
+            'total_posts_month' => Post::getPostsCount('month', $author_id),
+            'total_posts_today' => Post::getPostsCount('day', $author_id)
+        ])->layoutData(['title' => 'Dashboard Page']);
     }
 }
