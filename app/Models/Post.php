@@ -58,7 +58,7 @@ class Post extends Model
             DB::raw("EXTRACT(MONTH FROM created_at) as month"),
             DB::raw('COUNT(*) as total')
         )
-            ->whereYear('created_at', $year)
+            ->whereBetween('created_at', ["$year-01-01", $year + 1 . "-01-01"])
             ->groupBy('month')
             ->orderBy('month');
 
