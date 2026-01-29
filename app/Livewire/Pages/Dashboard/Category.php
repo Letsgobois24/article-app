@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard;
 
 use App\Models\Category as ModelsCategory;
 use App\Services\CategoryService;
+use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -76,14 +77,27 @@ class Category extends Component
     #[On('delete-confirm')]
     public function destroy($id)
     {
-        ModelsCategory::destroy($id);
+        try {
+            ModelsCategory::destroy($id);
+            CategoryService::clearCache();
 
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'Category has been deleted succesfully'
-        ]);
-
-        CategoryService::clearCache();
+            session()->flash('status', [
+                'theme' => 'success',
+                'message' => 'Category has been deleted succesfully'
+            ]);
+        } catch (QueryException $e) {
+            if ($e->getCode() == '23503')
+                session()->flash('status', [
+                    'theme' => 'danger',
+                    'message' => 'Categories are still referenced by other data'
+                ]);
+            else {
+                session()->flash('status', [
+                    'theme' => 'danger',
+                    'message' => 'Error deleted category'
+                ]);
+            }
+        }
 
         return $this->redirect(
             route('categories-dashboard'),
