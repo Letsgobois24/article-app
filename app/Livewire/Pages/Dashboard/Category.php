@@ -25,15 +25,7 @@ class Category extends Component
 
     public function render()
     {
-        if ($this->search) {
-            $categories = ModelsCategory::searching($this->search)->get();
-        } else {
-            $categories = CategoryService::cacheAll();
-        }
-
-        return view('livewire.pages.dashboard.category', [
-            'categories' => $categories
-        ])->layoutData(['title' => 'Dashboard Categories']);
+        return view('livewire.pages.dashboard.category')->layoutData(['title' => 'Dashboard Categories']);
     }
 
     public function resetErrorInput()
@@ -108,8 +100,9 @@ class Category extends Component
         );
     }
 
-    public function resetForm()
+    #[On('resetSearch')]
+    public  function resetSearch()
     {
-        $this->reset();
+        $this->reset('search');
     }
 }
