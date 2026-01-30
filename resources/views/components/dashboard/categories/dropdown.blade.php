@@ -10,13 +10,18 @@
     <div x-show="isDropdown" x-cloak x-transition
         class="absolute z-20 mt-2 w-36 rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-lg border border-gray-200">
         <!-- Edit -->
-        <x-dashboard.categories.modal :isEdit='true'>
-            <div wire:click='showEditModal({{ $category->id }})'
-                class="flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition">
-                <x-icons.pen size='20' />
-                Edit
-            </div>
-        </x-dashboard.categories.modal>
+        <button
+            class="cursor-pointer w-full flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition"
+            x-on:click="
+                isOpenModal=true;
+                id=@js($category->id);
+                name=@js($category->name); 
+                slug=lastSlug=@js($category->slug);
+                color=lastColor=@js($category->color);
+                ">
+            <x-icons.pen size='20' />
+            Edit
+        </button>
 
         <hr class="border-gray-200">
 
