@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -34,5 +35,12 @@ class Category extends Model
                     }
                 }
             ]);
+    }
+
+    public function scopeSearching(Builder $query, $search = '')
+    {
+        $query->when($search ?? false, function ($query, $search) {
+            $query->whereRaw("LOWER(name) LIKE '%" . Str::lower($search) . "%'");
+        });
     }
 }

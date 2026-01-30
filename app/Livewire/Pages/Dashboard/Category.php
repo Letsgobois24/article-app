@@ -13,6 +13,9 @@ use Livewire\Component;
 #[Layout('components.layouts.dashboard')]
 class Category extends Component
 {
+    protected $listeners = ['searching' => '$refresh'];
+
+    public $search = '';
     public $name = '';
     public $slug = '';
     public $lastSlug;
@@ -22,8 +25,14 @@ class Category extends Component
 
     public function render()
     {
+        if ($this->search) {
+            $categories = ModelsCategory::searching($this->search)->get();
+        } else {
+            $categories = CategoryService::cacheAll();
+        }
+
         return view('livewire.pages.dashboard.category', [
-            'categories' => CategoryService::cacheAll()
+            'categories' => $categories
         ])->layoutData(['title' => 'Dashboard Categories']);
     }
 

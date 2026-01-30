@@ -1,6 +1,8 @@
 <div>
-    <div class="flex justify-between items-center">
-        <x-title>Post Categories</x-title>
+    <x-title>Post Categories</x-title>
+    <div class="flex justify-between items-center mb-8">
+        {{-- Search --}}
+        <livewire:components.default-search wire:model='search' />
         {{-- Add Category --}}
         <x-dashboard.categories.modal :isEdit="false">
             <div wire:click='resetForm'
@@ -11,6 +13,8 @@
         </x-dashboard.categories.modal>
 
     </div>
+
+    {{-- Table --}}
     <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
         <table class="w-full text-sm text-left rtl:text-right text-body">
             <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
