@@ -36,15 +36,9 @@ class Category extends Component
         ])->layoutData(['title' => 'Dashboard Categories']);
     }
 
-    public function showEditModal($id)
+    public function resetErrorInput()
     {
-        $this->reset();
-
-        $category = ModelsCategory::find($id);
-        $this->name = $category['name'];
-        $this->slug = $this->lastSlug = $category['slug'];
-        $this->color = $this->lastColor = $category['color'];
-        $this->id = $id;
+        $this->resetErrorBag();
     }
 
     public function save()
