@@ -19,13 +19,11 @@ class Table extends Component
 
     public function render()
     {
-        // if ($this->search) {
-        //     $categories = Category::searching($this->search)->get();
-        // } else {
-        //     $categories = CategoryService::cacheAll();
-        // }
-
-        $categories = Category::searching($this->search)->simplePaginate(5);
+        if ($this->search) {
+            $categories = Category::searching($this->search)->simplePaginate(5);
+        } else {
+            $categories = CategoryService::pageCache($this->getPage(), 5);
+        }
 
         return view('livewire.components.dashboard.category.table', [
             'categories' => $categories

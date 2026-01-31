@@ -12,8 +12,13 @@ class CategoryService
         return Cache::rememberForever('categories.all', fn() => Category::all());
     }
 
+    public static function pageCache($page, $row)
+    {
+        return Cache::rememberForever("categories_page_$page", fn() => Category::paginate($row));
+    }
+
     public static function clearCache()
     {
-        Cache::forget('categories.all');
+        Cache::flush();
     }
 }
