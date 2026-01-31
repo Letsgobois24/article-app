@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components;
 
+use App\Livewire\Components\Dashboard\Category\Table;
 use Livewire\Attributes\Modelable;
 use Livewire\Component;
 
@@ -18,5 +19,6 @@ class DefaultSearch extends Component
     public function searching()
     {
         $this->dispatch('searching');
+        $this->dispatch('reset-page');
     }
 }

@@ -101,7 +101,7 @@ class Category extends Component
     }
 
     #[On('resetSearch')]
-    public  function resetSearch()
+    public function resetSearch()
     {
         $this->reset('search');
     }

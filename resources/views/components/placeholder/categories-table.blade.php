@@ -14,7 +14,7 @@
             @for ($i = 0; $i < 6; $i++)
                 <tr class="border-b border-default">
                     <td class="px-6 py-5">
-                        <div class="h-4 w-6 bg-gray-200 rounded"></div>
+                        <div class="h-4 w-4 bg-gray-200 rounded"></div>
                     </td>
 
                     <td class="px-6 py-5">
