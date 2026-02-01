@@ -13,7 +13,7 @@ use Livewire\Component;
 #[Layout('components.layouts.dashboard')]
 class Category extends Component
 {
-    protected $listeners = ['searching' => '$refresh'];
+    protected $listeners = ['search-updated'];
 
     public $search = '';
     public $name = '';

@@ -1,4 +1,4 @@
-<form wire:submit.prevent="searching" class="w-3/5">
+<form wire:submit.prevent="handleSearching" class="w-3/5">
     <div class="flex items-center shadow-xs rounded-base -space-x-0.5">
         {{-- Search Input --}}
         <input wire:model='search' type="search" id="search" name="search"

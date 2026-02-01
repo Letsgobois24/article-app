@@ -16,9 +16,8 @@ class DefaultSearch extends Component
         return view('livewire.components.default-search');
     }
 
-    public function searching()
+    public function handleSearching()
     {
-        $this->dispatch('searching');
-        $this->dispatch('reset-page');
+        $this->dispatch('search-updated');
     }
 }

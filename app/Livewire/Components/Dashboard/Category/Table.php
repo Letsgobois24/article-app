@@ -12,13 +12,19 @@ use Livewire\WithPagination;
 
 class Table extends Component
 {
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
 
     #[Reactive]
     public $search = '';
 
+    private $lastSearch;
+
     public function render()
     {
+        if ($this->lastSearch != $this->search) {
+            $this->resetPage();
+        }
+
         if ($this->search) {
             $categories = Category::searching($this->search)->simplePaginate(5);
         } else {
@@ -33,12 +39,6 @@ class Table extends Component
     public function resetSearch()
     {
         $this->dispatch('resetSearch');
-    }
-
-    #[On('reset-page')]
-    public function handleReset()
-    {
-        $this->resetPage();
     }
 
     public function placeholder()
