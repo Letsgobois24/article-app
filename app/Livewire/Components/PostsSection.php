@@ -19,8 +19,17 @@ class PostsSection extends Component
     #[Reactive]
     public $category = '';
 
+    private $lastSearch, $lastCategory;
+
     public function render()
     {
+        if ($this->lastSearch != $this->search || $this->lastCategory != $this->category) {
+            $this->resetPage();
+        }
+
+        $this->lastSearch = $this->search;
+        $this->lastCategory = $this->category;
+
         $filter = [
             'search' => $this->search,
             'category' => $this->category,

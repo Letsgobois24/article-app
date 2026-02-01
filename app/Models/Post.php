@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -32,8 +33,9 @@ class Post extends Model
     public function scopeFilter(Builder $query, array $filters): void
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->whereRaw("LOWER(title) LIKE '%" . Str::lower($search) . "%'");
         });
+
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
             $query->whereHas(
