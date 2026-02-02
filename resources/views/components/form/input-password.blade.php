@@ -8,7 +8,7 @@
                 x-transition:enter-start="scale-x-0" x-transition:enter-end="scale-x-100"
                 x-transition:leave="transition-transform ease-in duration-100" x-transition:leave-start="scale-x-100"
                 x-transition:leave-end="scale-x-0"
-                class="w-5 transition z-5 -rotate-45 absolute top-1/2 -translate-y-1/2 right-4">
+                class="w-5 transition z-5 border border-dark h-0 -rotate-45 absolute top-1/2 -translate-y-1/2 right-4">
             <x-icons.eye size="20" class="text-gray-400 absolute top-1/2 -translate-y-1/2 right-4" />
         </div>
         <input wire:model="{{ $name }}" :type="show ? 'text' : 'password'" name="{{ $name }}"

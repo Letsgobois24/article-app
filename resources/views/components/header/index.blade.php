@@ -4,8 +4,7 @@
         {{-- Logo --}}
         <div class="flex md:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
-                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt=""
-                    class="h-8 w-auto" />
+                <img src="{{ asset('img/logo/logo-only.png') }}" alt="Logo Artikula" class="h-10 w-auto grayscale-50" />
             </a>
         </div>
         {{-- Navigasi --}}

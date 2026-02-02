@@ -4,7 +4,7 @@
         {{-- Logo --}}
         <div class="flex items-center px-5 w-64">
             <x-dashboard.side-button />
-            <div class="font-bold text-2xl ml-4">Artikelku</div>
+            <div class="font-bold text-2xl ml-4">Artikula</div>
         </div>
 
         <x-header.sign-out-button />
