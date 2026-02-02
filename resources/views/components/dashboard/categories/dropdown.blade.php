@@ -12,8 +12,8 @@
         <!-- Edit -->
         <button
             class="cursor-pointer w-full flex items-center gap-2 px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 transition"
-            wire:click='resetErrorInput'
             x-on:click="
+                $dispatch('reset-error');
                 isOpenModal=true;
                 id=@js($category->id);
                 name=@js($category->name); 

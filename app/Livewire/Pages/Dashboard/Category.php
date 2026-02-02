@@ -28,6 +28,7 @@ class Category extends Component
         return view('livewire.pages.dashboard.category')->layoutData(['title' => 'Dashboard Categories']);
     }
 
+    #[On('reset-error')]
     public function resetErrorInput()
     {
         $this->resetErrorBag();
