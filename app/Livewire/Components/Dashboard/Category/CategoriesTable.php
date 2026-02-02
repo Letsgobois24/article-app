@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-class Table extends Component
+class CategoriesTable extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
@@ -30,7 +30,7 @@ class Table extends Component
             $categories = CategoryService::pageCache($this->getPage(), 5);
         }
 
-        return view('livewire.components.dashboard.category.table', [
+        return view('livewire.components.dashboard.category.categories-table', [
             'categories' => $categories
         ]);
     }

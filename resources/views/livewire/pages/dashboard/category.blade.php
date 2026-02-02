@@ -29,7 +29,7 @@
     </div>
 
     {{-- Table --}}
-    <livewire:components.dashboard.category.table lazy :search="$search" />
+    <livewire:components.dashboard.category.categories-table lazy :search="$search" />
 
     {{-- Modal --}}
     <div x-show="isOpenModal" x-cloak>
