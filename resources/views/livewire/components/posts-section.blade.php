@@ -1,4 +1,4 @@
-<section>
+<div>
     @if ($posts && count($posts) > 0)
         <div class="relative
             overflow-x-auto shadow-xs rounded-base border border-default">
@@ -54,4 +54,4 @@
     <div class="my-2">
         {{ $posts->links(data: ['scrollTo' => false]) }}
     </div>
-</section>
+</div>

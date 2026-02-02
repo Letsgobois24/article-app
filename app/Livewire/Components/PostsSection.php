@@ -42,7 +42,7 @@ class PostsSection extends Component
 
     public function placeholder()
     {
-        return view('components.ui.loading-placeholder');
+        return view('components.placeholder.posts-table');
     }
 
     #[On('delete-confirm')]

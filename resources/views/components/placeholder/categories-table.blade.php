@@ -2,11 +2,11 @@
     <table class="w-full text-sm text-left rtl:text-right text-body">
         <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-default-medium">
             <tr>
-                <th class="px-6 py-3 font-medium">#</th>
-                <th class="px-6 py-3 font-medium">Category Name</th>
-                <th class="px-6 py-3 font-medium">Slug</th>
-                <th class="px-6 py-3 font-medium text-center">Color</th>
-                <th class="px-6 py-3 font-medium text-center">Action</th>
+                <th scope="col" class="px-6 py-3 font-medium">#</th>
+                <th scope="col" class="px-6 py-3 font-medium">Category Name</th>
+                <th scope="col" class="px-6 py-3 font-medium">Slug</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Color</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Action</th>
             </tr>
         </thead>
 
@@ -31,7 +31,7 @@
                     </td>
 
                     <td class="px-6 py-5">
-                        <div class="h-4 w-4 bg-gray-200"></div>
+                        <div class="h-4 w-4 bg-gray-200 mx-auto"></div>
                     </td>
                 </tr>
             @endfor
