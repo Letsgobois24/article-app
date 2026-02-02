@@ -21,15 +21,15 @@ class Index extends Component
         return view('livewire.pages.dashboard.posts.index')->layoutData(['title' => 'Posts Dashboard']);
     }
 
-    #[On('reset-all')]
-    public function resetAll()
-    {
-        $this->reset();
-    }
-
     #[On('set-category')]
     public function setCategory($slug)
     {
         $this->category = $slug;
+    }
+
+    #[On('resetSearch')]
+    public function resetSearch()
+    {
+        $this->reset('search');
     }
 }
