@@ -19,8 +19,18 @@ class BlogsSection extends Component
     #[Reactive]
     public $author = '';
 
+    public $lastSearch, $lastCategory, $lastAuthor;
+
     public function render()
     {
+        // Reset page while searching
+        if ($this->lastSearch != $this->search || $this->lastCategory != $this->category || $this->lastAuthor != $this->author) {
+            $this->resetPage();
+        }
+        $this->lastSearch = $this->search;
+        $this->lastCategory = $this->category;
+        $this->lastAuthor = $this->author;
+
         $filter = [
             'search' => $this->search,
             'category' => $this->category,
