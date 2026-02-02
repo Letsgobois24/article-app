@@ -4,7 +4,7 @@
         <button id="dropdown-button" x-on:click="isDropdown=true" type="button"
             class="relative cursor-pointer inline-flex items-center shrink-0 z-10 text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-s-base text-sm px-4 py-2.5 focus:outline-none">
             <x-icons.category size="16" class="me-1.5" />
-            <span x-text="slugToNormal(category)"></span>
+            <span x-text="slugToNormal(category)" class="min-w-28"></span>
             <x-icons.dropdown-line size="18" class="ms-1.5" />
             <div x-show="isDropdown" x-cloak x-on:click.outside="isDropdown=false"
                 x-transition:enter="transition ease-out duration-200 origin-top"

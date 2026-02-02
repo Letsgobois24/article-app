@@ -4,7 +4,6 @@ namespace App\Livewire\Components\Dashboard\Category;
 
 use App\Models\Category;
 use App\Services\CategoryService;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
@@ -17,7 +16,7 @@ class Table extends Component
     #[Reactive]
     public $search = '';
 
-    private $lastSearch;
+    public $lastSearch;
 
     public function render()
     {

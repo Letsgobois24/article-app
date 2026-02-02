@@ -19,7 +19,8 @@ class PostsSection extends Component
     #[Reactive]
     public $category = '';
 
-    private $lastSearch, $lastCategory;
+    public $lastSearch = '';
+    public $lastCategory = '';
 
     public function render()
     {
