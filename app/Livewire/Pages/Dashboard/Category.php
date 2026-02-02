@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages\Dashboard;
 
-use App\Models\Category as ModelsCategory;
+use App\Models\Category as CategoryModel;
 use App\Services\CategoryService;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
@@ -45,13 +45,13 @@ class Category extends Component
         if (!$this->id) {
             // Create New Category
             $validatedData = $this->validate($rules);
-            ModelsCategory::create($validatedData);
+            CategoryModel::create($validatedData);
         } else {
             // Update Category
             $rules['slug'][1] = $rules['slug'][1]->ignore($this->lastSlug, 'slug');
             $rules['color'][1] = $rules['color'][1]->ignore($this->lastColor, 'color');
             $validatedData = $this->validate($rules);
-            ModelsCategory::where('id', $this->id)->update($validatedData);
+            CategoryModel::where('id', $this->id)->update($validatedData);
         }
 
         // Flash Message
@@ -74,7 +74,7 @@ class Category extends Component
     public function destroy($id)
     {
         try {
-            ModelsCategory::destroy($id);
+            CategoryModel::destroy($id);
             CategoryService::clearCache();
 
             session()->flash('status', [

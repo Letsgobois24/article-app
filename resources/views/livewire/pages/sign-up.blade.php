@@ -1,11 +1,12 @@
 <div>
     <form wire:submit.prevent='store' class="space-y-3">
-        @csrf
         <x-form.input type="email" name="email" placeholder="Your email" label="Email Address" />
         <x-form.input type="text" name="name" placeholder="Your name" label="Name" />
         <x-form.input type="text" name="username" placeholder="Your username" label="Username" />
-        <x-form.input type="password" name="password" placeholder="••••••••" label="Password" />
-        <x-form.input type="password" name="password_confirmation" placeholder="••••••••" label="Confirm Password" />
+
+        <x-form.input-password name="password" label="Password" />
+        <x-form.input-password name="password_confirmation" placeholder="Confirm your password"
+            label="Confirm Password" />
 
         <x-ui.submit-button target="store">Create</x-ui.submit-button>
     </form>

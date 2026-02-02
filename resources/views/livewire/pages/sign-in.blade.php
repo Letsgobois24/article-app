@@ -1,9 +1,7 @@
 <div>
     <form wire:submit.prevent="authenticate" class="space-y-3">
-        @csrf
         <x-form.input type="email" name="email" placeholder="Your email" label="Email Address" />
-        <x-form.input type="password" name="password" placeholder="••••••••" label="Password" />
-
+        <x-form.input-password />
         <x-ui.submit-button target="authenticate">
             Sign in
         </x-ui.submit-button>
