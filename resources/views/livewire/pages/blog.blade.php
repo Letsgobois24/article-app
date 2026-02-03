@@ -1,5 +1,7 @@
+@section('meta_description', Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 150))
+
 <div>
-    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:pageTitle>{{ $pageTitle }}</x-slot:pageTitle>
     <section class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
         <div class="px-6 mx-auto max-w-7xl ">
             <article

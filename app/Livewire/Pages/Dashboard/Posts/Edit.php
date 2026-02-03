@@ -7,11 +7,14 @@ use App\Services\CategoryService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
+#[Title('Edit Artikel — Dashboard Artikula')]
+
 class Edit extends Component
 {
     use WithFileUploads;
@@ -41,8 +44,7 @@ class Edit extends Component
         return view('livewire.pages.dashboard.posts.save', [
             'categories' => $categories,
             'isEdit' => true,
-        ])
-            ->layoutData(['title' => 'Edit Post']);
+        ]);
     }
 
     public function save()

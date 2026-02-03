@@ -4,13 +4,15 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
+#[Title('Tulis Artikel Baru — Dashboard Artikula')]
+
 class Create extends Component
 {
     use WithFileUploads;
@@ -36,7 +38,7 @@ class Create extends Component
         return view('livewire.pages.dashboard.posts.save', [
             'categories' => Category::all(['id', 'name']),
             'isEdit' => false,
-        ])->layoutData(['title' => 'Create Post']);
+        ]);
     }
 
     public function save()

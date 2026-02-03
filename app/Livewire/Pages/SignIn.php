@@ -5,9 +5,12 @@ namespace App\Livewire\Pages;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 
 #[Layout('components.layouts.auth')]
+#[Title('Masuk — Artikula')]
+
 class SignIn extends Component
 {
     #[Validate('required|email')]

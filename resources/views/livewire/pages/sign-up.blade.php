@@ -1,3 +1,5 @@
+@section('meta_description', 'Buat akun Artikula dan mulai berbagi serta membaca artikel.')
+
 <div>
     <form wire:submit.prevent='store' class="space-y-3">
         <x-form.input type="email" name="email" placeholder="Your email" label="Email Address" />

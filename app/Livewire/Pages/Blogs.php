@@ -4,8 +4,11 @@ namespace App\Livewire\Pages;
 
 // use App\Livewire\Components\BlogsSection;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+
+#[Title('Artikel Terbaru — Artikula Ruang Baca')]
 
 class Blogs extends Component
 {
@@ -21,7 +24,7 @@ class Blogs extends Component
     public function render()
     {
         return view('livewire.pages.blogs', [
-            'title' => 'Blog',
+            'pageTitle' => 'Blog',
         ]);
     }
 

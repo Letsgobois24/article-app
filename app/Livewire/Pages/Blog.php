@@ -17,7 +17,7 @@ class Blog extends Component
     public function render()
     {
         return view('livewire.pages.blog', [
-            'title' => 'Single Post'
-        ]);
+            'pageTitle' => 'Single Post'
+        ])->title($this->post->title . ' - Artikula');
     }
 }
