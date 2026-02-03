@@ -72,16 +72,13 @@
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-50 translate-x-full"
         class="fixed md:hidden block inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-        <div class="flex items-center justify-between">
-            <a href="#" class="-m-1.5 p-1.5">
-                <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt=""
-                    class="h-8 w-auto" />
-            </a>
-            <button type="button" @click="isOpen = false"
-                class="cursor-pointer -m-2.5 rounded-md p-1 text-gray-700 hover:bg-gray-50">
-                <x-icons.cross size="24" />
-            </button>
-        </div>
+        <a href="/" class="block w-fit mx-auto">
+            <img src="{{ asset('img/logo/logo-name.png') }}" alt="Logo Artikula" class="h-28 w-auto grayscale-50" />
+        </a>
+        <button type="button" @click="isOpen = false"
+            class="absolute top-4 right-4 cursor-pointer rounded-md p-1 text-gray-700 hover:bg-gray-50">
+            <x-icons.cross size="24" />
+        </button>
         <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
