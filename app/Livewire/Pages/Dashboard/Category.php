@@ -8,9 +8,12 @@ use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
+#[Title('Kelola Kategori — Admin Artikula')]
+
 class Category extends Component
 {
     protected $listeners = ['search-updated'];
@@ -25,7 +28,7 @@ class Category extends Component
 
     public function render()
     {
-        return view('livewire.pages.dashboard.category')->layoutData(['title' => 'Dashboard Categories']);
+        return view('livewire.pages.dashboard.category');
     }
 
     #[On('reset-error')]

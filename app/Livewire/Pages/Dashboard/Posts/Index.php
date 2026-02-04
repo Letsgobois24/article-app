@@ -4,10 +4,13 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
+#[Title('Kelola Artikel — Dashboard Artikula')]
+
 class Index extends Component
 {
     #[Url]
@@ -18,7 +21,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.pages.dashboard.posts.index')->layoutData(['title' => 'Posts Dashboard']);
+        return view('livewire.pages.dashboard.posts.index');
     }
 
     #[On('set-category')]

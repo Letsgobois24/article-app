@@ -4,10 +4,13 @@ namespace App\Livewire\Pages;
 
 use App\Models\User;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('components/layouts/auth')]
+#[Title('Daftar Akun — Artikula')]
+
 class SignUp extends Component
 {
     #[Validate("required|email:dns|unique:users,email")]
@@ -27,7 +30,7 @@ class SignUp extends Component
 
     public function render()
     {
-        return view('livewire.pages.sign-up')->layoutData(['isSignInPage' => false]);;
+        return view('livewire.pages.sign-up')->layoutData(['isSignInPage' => false]);
     }
 
     function store()
