@@ -39,4 +39,10 @@ class Blogs extends Component
     {
         $this->author = $username;
     }
+
+    #[On('resetSearch')]
+    public function resetSearch()
+    {
+        $this->reset();
+    }
 }

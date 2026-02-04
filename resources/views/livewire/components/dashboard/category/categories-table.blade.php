@@ -43,6 +43,16 @@
                     </tr>
                 @empty
                     <x-ui.empty.empty-table colspan="5" :search="$search" />
+                    <div class="py-8">
+                        <x-ui.empty.empty-container colspan="5">
+                            <p class="text-sm text-body">
+                                Tidak ditemukan kategori dengan kata kunci
+                                <span class="font-medium text-heading">
+                                    "{{ $search }}"
+                                </span>
+                            </p>
+                        </x-ui.empty.empty-container>
+                    </div>
                 @endforelse
             </tbody>
         </table>

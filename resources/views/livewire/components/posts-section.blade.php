@@ -34,7 +34,14 @@
                         </td>
                     </tr>
                 @empty
-                    <x-ui.empty.empty-table colspan="4" :search="$search" />
+                    <x-ui.empty.empty-table colspan="4" :search="$search">
+                        <p class="text-sm text-body">
+                            Tidak ditemukan artikel dengan kata kunci
+                            <span class="font-medium text-heading">
+                                "{{ $search }}"
+                            </span>
+                        </p>
+                    </x-ui.empty.empty-table>
                 @endforelse
             </tbody>
         </table>

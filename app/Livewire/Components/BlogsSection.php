@@ -4,6 +4,7 @@ namespace App\Livewire\Components;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithPagination;
