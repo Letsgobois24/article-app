@@ -33,9 +33,9 @@ class Post extends Model
     public function scopeFilter(Builder $query, array $filters): void
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
-            $query->whereRaw("LOWER(title) LIKE '%" . Str::lower($search) . "%'");
+            $query->whereRaw("to_tsvector('english', title || ' ' || body) @@ websearch_to_tsquery('$search')");
+            $query->orderByRaw("ts_rank(searchable, websearch_to_tsquery('$search')) DESC");
         });
-
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
             $query->whereHas(
