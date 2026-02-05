@@ -75,7 +75,7 @@
 
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold">Latest Articles</h2>
-                <a href="#" class="text-emerald-600 hover:underline text-sm">
+                <a wire:navigate.hover href="/blogs" class="text-emerald-600 hover:underline text-sm">
                     View all
                 </a>
             </div>
@@ -84,8 +84,9 @@
                 @foreach ($latest_posts as $post)
                     <article class="border rounded-xl hover:shadow-md transition">
                         <div class="p-5">
-                            <span class="text-xs font-semibold"
-                                style="color: {{ $post->category->color }}">{{ $post->category->name }}</span>
+                            <x-ui.category-badge :category="$post->category" />
+                            {{-- <span class="text-xs font-semibold"
+                                style="color: {{ $post->category->color }}">{{ $post->category->name }}</span> --}}
                             <h3 class="font-bold text-lg mt-2 mb-2">
                                 {{ $post->title }}
                             </h3>

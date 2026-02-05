@@ -27,7 +27,7 @@
                         buttonClass="cursor-pointer inline-flex items-center gap-x-1 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition" />
                 </div>
 
-                <x-ui.category-badge :category="$post->category" />
+                <x-ui.category-badge variant="redirect" :category="$post->category" />
 
                 {{-- Post Body --}}
                 {{-- Body Title --}}

@@ -28,7 +28,7 @@
                         </address>
                     </a>
                 </header>
-                <x-ui.category-badge :category="$post->category" />
+                <x-ui.category-badge variant="redirect" :category="$post->category" />
 
                 {{-- Post Body --}}
                 {{-- Title --}}
