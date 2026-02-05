@@ -90,7 +90,7 @@
                                 {{ $post->title }}
                             </h3>
                             <p class="text-sm text-gray-600 line-clamp-3">
-                                {{ Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 100) }}
+                                {{ Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 130, '...', true) }}
                             </p>
                             <div class="mt-4 text-xs text-gray-500">
                                 By <span class="font-medium">{{ $post->author->name }}</span> •

@@ -11,7 +11,7 @@
 
     {{-- Body --}}
     <div class="mb-5 text-gray-500 flex-1">
-        {{ Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 150) }}
+        {{ Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 150, '...', true) }}
     </div>
 
     {{-- Author Profile --}}
