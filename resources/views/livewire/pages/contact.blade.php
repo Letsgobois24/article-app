@@ -1,8 +1,8 @@
-@section('meta_description', 'Hubungi tim Artikula untuk pertanyaan, masukan, atau kolaborasi melalui halaman kontak
+@section('meta_description',
+    'Hubungi tim Artikula untuk pertanyaan, masukan, atau kolaborasi melalui halaman kontak
     kami.')
 
     <div>
-        <x-slot:pageTitle>{{ $pageTitle }}</x-slot:pageTitle>
         <h1>Hubungi kami</h1>
         <h4>Email: rayhanmalfarizi@gmail.com</h4>
         <a href="https://www.instagram.com/rymalfarizi/" target="_blank">Instagram</a>

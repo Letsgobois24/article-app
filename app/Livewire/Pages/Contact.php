@@ -11,6 +11,6 @@ class Contact extends Component
 {
     public function render()
     {
-        return view('livewire.pages.contact', ['pageTitle' => 'Contact Us']);
+        return view('livewire.pages.contact');
     }
 }
