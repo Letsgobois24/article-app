@@ -4,7 +4,6 @@ namespace App\Livewire\Components;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -41,7 +40,7 @@ class BlogsSection extends Component
         $query = Post::with(['category', 'author'])->filter($filter)->latest();
 
         if (!$this->search && !$this->category && !$this->author && $this->getPage() < 5) {
-            $posts = Cache::remember('posts.page.' . $this->getPage(), 300, fn() => $query->paginate(6));
+            $posts = Cache::remember('posts.page.' . $this->getPage(), 180, fn() => $query->paginate(6));
         } else {
             $posts = $query->paginate(6);
         }

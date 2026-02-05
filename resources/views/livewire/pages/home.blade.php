@@ -17,8 +17,8 @@
 
             <!-- Search -->
             <div class="max-w-2xl mx-auto">
-                <form class="flex bg-white rounded-xl shadow-lg overflow-hidden">
-                    <input type="search" placeholder="Search articles or topics..."
+                <form wire:submit='searching' class="flex bg-white rounded-xl shadow-lg overflow-hidden">
+                    <input wire:model='search' type="search" placeholder="Search articles or topics..."
                         class="flex-1 px-5 py-4 text-gray-700 focus:outline-none">
                     <button type="submit"
                         class="px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition">
@@ -34,22 +34,22 @@
         <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-center">
 
             <div class="bg-white rounded-xl shadow p-8">
-                <h3 class="text-4xl font-bold text-emerald-600">1,248</h3>
+                <h3 class="text-4xl font-bold text-emerald-600">{{ Number::abbreviate($total_posts, 1) }}</h3>
                 <p class="mt-2 text-gray-600">Total Articles</p>
             </div>
 
             <div class="bg-white rounded-xl shadow p-8">
-                <h3 class="text-4xl font-bold text-emerald-600">312</h3>
+                <h3 class="text-4xl font-bold text-emerald-600">{{ $total_posts_year }}</h3>
                 <p class="mt-2 text-gray-600">Articles This Year</p>
             </div>
 
             <div class="bg-white rounded-xl shadow p-8">
-                <h3 class="text-4xl font-bold text-emerald-600">18</h3>
+                <h3 class="text-4xl font-bold text-emerald-600">{{ $total_categories }}</h3>
                 <p class="mt-2 text-gray-600">Categories</p>
             </div>
             <div class="bg-white rounded-xl shadow p-8">
-                <h3 class="text-4xl font-bold text-emerald-600">18</h3>
-                <p class="mt-2 text-gray-600">Categories</p>
+                <h3 class="text-4xl font-bold text-emerald-600">{{ $total_authors }}</h3>
+                <p class="mt-2 text-gray-600">Author</p>
             </div>
 
         </div>
@@ -60,7 +60,7 @@
         <h2 class="text-2xl font-bold mb-6">Popular Categories</h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            @foreach ($popularCategories as $category)
+            @foreach ($popular_categories as $category)
                 <div class="p-5 bg-white rounded-lg shadow hover:shadow-md transition">
                     <h3 class="font-semibold">{{ $category['name'] }}</h3>
                     <p class="text-sm text-gray-500">{{ $category['posts_count'] }} articles</p>
@@ -81,54 +81,24 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-
-                <article class="border rounded-xl hover:shadow-md transition">
-                    <div class="p-5">
-                        <span class="text-xs text-emerald-600 font-semibold">Technology</span>
-                        <h3 class="font-bold text-lg mt-2 mb-2">
-                            Understanding Full-Text Search in PostgreSQL
-                        </h3>
-                        <p class="text-sm text-gray-600 line-clamp-3">
-                            A comprehensive guide on implementing text search using GIN Index
-                            and tsvector for modern applications.
-                        </p>
-                        <div class="mt-4 text-xs text-gray-500">
-                            By <span class="font-medium">Admin</span> • 2 days ago
+                @foreach ($latest_posts as $post)
+                    <article class="border rounded-xl hover:shadow-md transition">
+                        <div class="p-5">
+                            <span class="text-xs font-semibold"
+                                style="color: {{ $post->category->color }}">{{ $post->category->name }}</span>
+                            <h3 class="font-bold text-lg mt-2 mb-2">
+                                {{ $post->title }}
+                            </h3>
+                            <p class="text-sm text-gray-600 line-clamp-3">
+                                {{ Str::limit(Str::of(html_entity_decode($post->body))->stripTags(), 100) }}
+                            </p>
+                            <div class="mt-4 text-xs text-gray-500">
+                                By <span class="font-medium">{{ $post->author->name }}</span> •
+                                {{ $post->created_at->diffForHumans() }}
+                            </div>
                         </div>
-                    </div>
-                </article>
-
-                <article class="border rounded-xl hover:shadow-md transition">
-                    <div class="p-5">
-                        <span class="text-xs text-emerald-600 font-semibold">Education</span>
-                        <h3 class="font-bold text-lg mt-2 mb-2">
-                            Digital Literacy in the Information Age
-                        </h3>
-                        <p class="text-sm text-gray-600 line-clamp-3">
-                            Why digital literacy has become a critical skill for students and
-                            the general public.
-                        </p>
-                        <div class="mt-4 text-xs text-gray-500">
-                            By <span class="font-medium">Editor</span> • 5 days ago
-                        </div>
-                    </div>
-                </article>
-
-                <article class="border rounded-xl hover:shadow-md transition">
-                    <div class="p-5">
-                        <span class="text-xs text-emerald-600 font-semibold">Opinion</span>
-                        <h3 class="font-bold text-lg mt-2 mb-2">
-                            Writing as a Tool for Thinking
-                        </h3>
-                        <p class="text-sm text-gray-600 line-clamp-3">
-                            Writing is not only about expressing ideas, but also a process
-                            of shaping thoughts.
-                        </p>
-                        <div class="mt-4 text-xs text-gray-500">
-                            By <span class="font-medium">Contributor</span> • 1 week ago
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                @endforeach
 
             </div>
         </div>
@@ -143,7 +113,7 @@
             <p class="mb-6 text-emerald-100">
                 Share your thoughts and articles with a broader audience.
             </p>
-            <a href="#"
+            <a href="@auth /dashboard/posts @else /sign-in @endauth"
                 class="inline-block bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition">
                 Write an Article
             </a>
