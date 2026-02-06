@@ -16,7 +16,7 @@
             <label class="block mb-2.5 text-sm font-medium text-heading" for="image">Post Image</label>
             <input @change="previewImage" wire:model='image' name="image" id="image" type="file"
                 accept="image/*"
-                class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full shadow-xs placeholder:text-body">
+                class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 block w-full shadow-xs placeholder:text-body">
             <p class="@error('image') text-xs text-red-600 @else text-sm text-gray-500 @enderror mt-0.5 h-4">
                 @error('image')
                     {{ $message }}

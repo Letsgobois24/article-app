@@ -1,7 +1,7 @@
 @props(['name' => 'password', 'placeholder' => 'Your password', 'label' => 'Password', 'class' => ''])
 
 <div class="{{ $class }}">
-    <label for="{{ $name }}" class="block mb-2 text-sm font-medium text-gray-900">{{ $label }}</label>
+    <label for="{{ $name }}" class="block mb-1.5 text-sm font-medium text-gray-800">{{ $label }}</label>
     <div x-data="{ show: false }" class="relative">
         <div x-on:click="show=!show" class="cursor-pointer">
             <hr x-show="!show" x-transition:enter="transition-transform ease-out duration-100"
@@ -14,12 +14,19 @@
         <input wire:model="{{ $name }}" :type="show ? 'text' : 'password'" name="{{ $name }}"
             id="{{ $name }}" autocomplete="{{ $name }}"
             class=" 
-                @error($name) ring-danger border-danger 
-                @else border-gray-300 focus:ring-primary-600 focus:border-primary-600 
-                @enderror bg-gray-50 border text-gray-900 rounded-lg block w-full p-3 sm:text-sm/6"
+                block w-full rounded-lg px-4 py-3 text-sm text-gray-900
+                bg-white border transition
+                placeholder:text-gray-400
+                focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600
+                @error($name)
+                    border-red-500 focus:ring-red-500/30 focus:border-red-500
+                @else
+                    border-gray-300
+                @enderror
+                "
             :placeholder="show ? @js($placeholder) : '••••••••'">
     </div>
-    <p class="text-xs text-red-600 mt-0.5 h-4">
+    <p class="mt-1 h-4 text-xs text-red-600">
         @error($name)
             {{ $message }}
         @enderror
