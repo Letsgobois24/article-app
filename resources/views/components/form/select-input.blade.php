@@ -1,7 +1,7 @@
 @props(['name', 'data', 'option' => 'name', 'empty' => 'Choose an option', 'label'])
 
 <div>
-    <label for="{{ $name }}" class="block mb-1.5 text-sm font-medium text-gray-800">{{ $label }}</label>
+    <x-form.label :name="$name">{{ $label }}</x-form.label>
     <select id="{{ $name }}" name="{{ $name }}" wire:model='{{ $name }}'
         class=" 
             block w-full rounded-lg px-4 py-3 text-sm text-gray-900
@@ -23,9 +23,6 @@
             </option>
         @endforeach
     </select>
-    <p class="mt-1 h-4 text-xs text-red-600">
-        @error($name)
-            {{ $message }}
-        @enderror
-    </p>
+
+    <x-form.error-validation :name="$name" />
 </div>

@@ -1,7 +1,7 @@
 @props(['name' => 'password', 'placeholder' => 'Your password', 'label' => 'Password', 'class' => ''])
 
 <div class="{{ $class }}">
-    <label for="{{ $name }}" class="block mb-1.5 text-sm font-medium text-gray-800">{{ $label }}</label>
+    <x-form.label :name="$name">{{ $label }}</x-form.label>
     <div x-data="{ show: false }" class="relative">
         <div x-on:click="show=!show" class="cursor-pointer">
             <hr x-show="!show" x-transition:enter="transition-transform ease-out duration-100"
@@ -26,9 +26,6 @@
                 "
             :placeholder="show ? @js($placeholder) : '••••••••'">
     </div>
-    <p class="mt-1 h-4 text-xs text-red-600">
-        @error($name)
-            {{ $message }}
-        @enderror
-    </p>
+
+    <x-form.error-validation :name="$name" />
 </div>

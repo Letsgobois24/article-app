@@ -11,9 +11,6 @@
         </button>
         <span class="ml-2 font-mono" x-text="color"></span>
     </div>
-    <p class="text-xs text-red-600 mt-0.5 h-4">
-        @error($name)
-            {{ $message }}
-        @enderror
-    </p>
+
+    <x-form.error-validation :name="$name" />
 </div>

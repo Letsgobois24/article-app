@@ -47,45 +47,11 @@
                 <h3 class="text-xl font-semibold mb-6">Send a Message</h3>
 
                 <form class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">
-                            Name
-                        </label>
-                        <input type="text"
-                            class="w-full px-4 py-2.5 border rounded-lg focus:ring-emerald-500 focus:border-emerald-500"
-                            placeholder="Your name">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">
-                            Email
-                        </label>
-                        <input type="email"
-                            class="w-full px-4 py-2.5 border rounded-lg focus:ring-emerald-500 focus:border-emerald-500"
-                            placeholder="you@example.com">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">
-                            Subject
-                        </label>
-                        <input type="text"
-                            class="w-full px-4 py-2.5 border rounded-lg focus:ring-emerald-500 focus:border-emerald-500"
-                            placeholder="Subject of your message">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-1">
-                            Message
-                        </label>
-                        <textarea rows="5" class="w-full px-4 py-2.5 border rounded-lg focus:ring-emerald-500 focus:border-emerald-500"
-                            placeholder="Write your message here..."></textarea>
-                    </div>
-
-                    <button type="submit"
-                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg transition">
-                        Send Message
-                    </button>
+                    <x-form.input variant="contact" name="name" placeholder="Your name" label="Name" />
+                    <x-form.input variant="contact" name="email" placeholder="you@example.com" label="Email" />
+                    <x-form.input variant="contact" name="subject" placeholder="Subject of your message" label="Subject" />
+                    <x-form.textarea name="message" placeholder="Write your message here..." label="Message" />
+                    <x-ui.submit-button target="">Send Message</x-ui.submit-button>
                 </form>
             </div>
 

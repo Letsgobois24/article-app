@@ -5,7 +5,7 @@
 ])
 
 <div x-data="{ target: @entangle($target), from: @entangle($from) }">
-    <label for="{{ $target }}" class="block mb-1.5 text-sm font-medium text-gray-800">{{ $label }}</label>
+    <x-form.label :name="$name">{{ $label }}</x-form.label>
     <div class="flex">
         <input wire:model="{{ $target }}" x-on:focus="!target ? target=slugify(from) : false"
             id="{{ $target }}" type="text" name="slug"
@@ -25,9 +25,7 @@
             <x-icons.auto-text size='22' />
         </button>
     </div>
-    <p class="mt-1 h-4 text-xs text-red-600">
-        @error($target)
-            {{ $message }}
-        @enderror
-    </p>
+
+    <x-form.error-validation :name="$name" />
+
 </div>
