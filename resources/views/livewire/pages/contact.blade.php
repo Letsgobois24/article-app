@@ -46,7 +46,7 @@
             <div class="bg-white border rounded-xl p-8">
                 <h3 class="text-xl font-semibold mb-6">Send a Message</h3>
 
-                <form class="space-y-5">
+                <form wire:submit='sendMessage' class="space-y-5">
                     <x-form.input variant="contact" name="name" placeholder="Your name" label="Name" />
                     <x-form.input variant="contact" name="email" placeholder="you@example.com" label="Email" />
                     <x-form.input variant="contact" name="subject" placeholder="Subject of your message" label="Subject" />
