@@ -5,7 +5,7 @@ namespace App\Livewire\Pages;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Kontak — Artikula Ruang Baca')]
+#[Title('Contact Artikula — Get in Touch')]
 
 class Contact extends Component
 {

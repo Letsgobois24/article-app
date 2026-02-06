@@ -31,7 +31,7 @@
 
     <!-- Statistics Section -->
     <section class="max-w-7xl mx-auto px-6 py-14">
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
             <div class="bg-white rounded-xl shadow p-8">
                 <h3 class="text-4xl font-bold text-emerald-600">{{ Number::abbreviate($total_posts, 1) }}</h3>
