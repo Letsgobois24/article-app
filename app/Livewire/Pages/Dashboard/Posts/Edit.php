@@ -13,7 +13,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Edit Artikel — Dashboard Artikula')]
+#[Title('Article Edit — Dashboard Artikula')]
 
 class Edit extends Component
 {

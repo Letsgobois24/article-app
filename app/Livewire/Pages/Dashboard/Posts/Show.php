@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Preview Artikel — Dashboard Artikula')]
+#[Title('Article Preview — Artikula')]
 
 class Show extends Component
 {

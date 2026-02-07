@@ -4,12 +4,10 @@ namespace App\Livewire\Pages\Dashboard;
 
 use App\Models\Post;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Dashboard — Artikula')]
 
 class Home extends Component
 {
@@ -39,6 +37,6 @@ class Home extends Component
             'total_posts_year' => Post::getPostsCount('year', $this->author_id),
             'total_posts_month' => Post::getPostsCount('month', $this->author_id),
             'total_posts_today' => Post::getPostsCount('day', $this->author_id)
-        ]);
+        ])->title("Dashboard — " . ($this->scope == 'global' ? 'Admin ' : '') . "Artikula");
     }
 }

@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-#[Title('Artikel Terbaru — Artikula Ruang Baca')]
+#[Title('Blogs — Thoughtful Articles & Perspectives | Artikula')]
 
 class Blogs extends Component
 {

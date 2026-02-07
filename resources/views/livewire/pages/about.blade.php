@@ -1,6 +1,5 @@
-    @section('meta_description',
-        'Kenali Artikula, visi kami, dan tujuan menghadirkan ruang baca digital yang informatif,
-        kritis, dan mudah diakses oleh semua.')
+    @section('meta_description', 'Learn about Artikula, our vision, values, and mission to create an accessible digital
+        reading space that encourages critical thinking and meaningful exploration.')
 
         <main class="bg-neutral-100 text-gray-800">
 

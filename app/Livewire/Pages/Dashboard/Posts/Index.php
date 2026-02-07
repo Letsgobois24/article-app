@@ -9,7 +9,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Kelola Artikel — Dashboard Artikula')]
+#[Title('Manage Article — Artikula')]
 
 class Index extends Component
 {

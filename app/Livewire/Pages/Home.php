@@ -10,7 +10,7 @@ use Illuminate\Support\Number;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Artikula: Ruang Baca — Artikel & Insight Berkualitas')]
+#[Title('Artikula — A Digital Reading Space for Thoughtful Articles')]
 
 class Home extends Component
 {

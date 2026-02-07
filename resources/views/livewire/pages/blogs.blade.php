@@ -1,6 +1,5 @@
-@section('meta_description',
-    'Jelajahi kumpulan artikel terbaru di Artikula yang membahas teknologi, pengetahuan, dan
-    topik menarik lainnya.')
+@section('meta_description', 'Browse thoughtful articles on Artikula across various topics, written to inform, inspire,
+    and spark deeper understanding.')
 
     <div class="bg-neutral-100 text-gray-800">
         {{-- Intro --}}

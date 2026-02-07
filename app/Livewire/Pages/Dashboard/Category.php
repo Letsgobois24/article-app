@@ -12,7 +12,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Kelola Kategori — Admin Artikula')]
+#[Title('Manage Category — Admin Artikula')]
 
 class Category extends Component
 {

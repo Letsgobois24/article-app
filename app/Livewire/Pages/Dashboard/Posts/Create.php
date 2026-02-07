@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Tulis Artikel Baru — Dashboard Artikula')]
+#[Title('Create New Article — Dashboard Artikula')]
 
 class Create extends Component
 {
