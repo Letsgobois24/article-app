@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Number;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -18,6 +17,10 @@ class Home extends Component
 
     public function render()
     {
+        $number = 20005;
+
+
+
         $popularCategories = Category::postsCategoriesCount()->orderBy('posts_count', 'desc')->limit(4)->get();
         $posts = Post::with(['category', 'author'])->latest()->limit(3)->get();
 

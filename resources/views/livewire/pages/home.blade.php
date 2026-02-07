@@ -1,4 +1,5 @@
-@section('meta_description', 'Explore Artikula, a digital reading space featuring thoughtful articles, diverse
+@section('meta_description',
+    'Explore Artikula, a digital reading space featuring thoughtful articles, diverse
     perspectives, and curated insights to inspire curiosity and critical thinking.')
 
     <main class="bg-neutral-100 text-gray-800">
@@ -35,7 +36,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
 
                 <div class="bg-white rounded-xl shadow p-8">
-                    <h3 class="text-4xl font-bold text-emerald-600">{{ Number::abbreviate($total_posts, 1) }}</h3>
+                    <h3 class="text-4xl font-bold text-emerald-600">{{ abbreviate($total_posts, 1) }}</h3>
                     <p class="mt-2 text-gray-600">Total Articles</p>
                 </div>
 
