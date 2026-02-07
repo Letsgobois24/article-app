@@ -4,7 +4,6 @@ namespace App\Livewire\Components;
 
 use App\Services\CategoryService;
 use Livewire\Attributes\Modelable;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 class SearchBlogs extends Component
@@ -12,8 +11,7 @@ class SearchBlogs extends Component
     #[Modelable]
     public $search = '';
 
-    #[Reactive]
-    public $category;
+    public $category = '';
 
     public function render()
     {
@@ -28,5 +26,10 @@ class SearchBlogs extends Component
     public function resetPage()
     {
         $this->dispatch('reset-page');
+    }
+
+    public function searching()
+    {
+        $this->dispatch('set-category', $this->category);
     }
 }
