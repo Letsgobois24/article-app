@@ -9,7 +9,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('components/layouts/auth')]
-#[Title('Daftar Akun — Artikula')]
+#[Title('Create an Account — Artikula')]
 
 class SignUp extends Component
 {

@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 
 #[Layout('components.layouts.auth')]
-#[Title('Masuk — Artikula')]
+#[Title('Sign In — Artikula')]
 
 class SignIn extends Component
 {
