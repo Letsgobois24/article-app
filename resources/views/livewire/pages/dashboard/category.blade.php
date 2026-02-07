@@ -8,7 +8,7 @@
     lastSlug: @entangle('lastSlug')
 }" @keyup.escape="isOpenModal=false">
     <x-title>Post Categories</x-title>
-    <div class="flex flex-col gap-3 sm:flex-row sm:justify-between items-stretch mb-8">
+    <div class="flex flex-col gap-6 sm:flex-row sm:justify-between items-stretch mb-3 sm:mb-8">
         {{-- Search --}}
         <div class="basis-2/3 shrink-0">
             <livewire:components.default-search wire:model='search' />
