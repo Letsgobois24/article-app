@@ -8,22 +8,26 @@
     lastSlug: @entangle('lastSlug')
 }" @keyup.escape="isOpenModal=false">
     <x-title>Post Categories</x-title>
-    <div class="flex justify-between items-stretch mb-8">
+    <div class="flex flex-col gap-3 sm:flex-row sm:justify-between items-stretch mb-8">
         {{-- Search --}}
-        <livewire:components.default-search wire:model='search' />
+        <div class="basis-2/3 shrink-0">
+            <livewire:components.default-search wire:model='search' />
+        </div>
         {{-- Add Category --}}
-        <x-ui.button wire:click='resetErrorInput'
-            x-on:click="
-                isOpenModal=true;
-                id=null;
-                name=''; 
-                slug='';
-                color='#4A90E2';
-                lastColor='#4A90E2';
-                ">
-            <x-icons.block-plus size='20' />
-            New Category
-        </x-ui.button>
+        <div class="basis-1/3 flex justify-end">
+            <x-ui.button wire:click='resetErrorInput'
+                x-on:click="
+                    isOpenModal=true;
+                    id=null;
+                    name=''; 
+                    slug='';
+                    color='#4A90E2';
+                    lastColor='#4A90E2';
+                    ">
+                <x-icons.block-plus size='20' />
+                New Category
+            </x-ui.button>
+        </div>
     </div>
 
     {{-- Table --}}

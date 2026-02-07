@@ -2,14 +2,18 @@
     <x-title>My Posts</x-title>
 
     {{-- Search --}}
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between items-stretch mt-4 mb-6">
-        <livewire:components.search-blogs :category='$category' wire:model='search' />
+    <div class="flex flex-col gap-3 sm:flex-row sm:justify-between mt-4 mb-6">
+        <div class="basis-2/3 shrink-0">
+            <livewire:components.search-blogs :category='$category' wire:model='search' />
+        </div>
 
+        <div class="basis-1/3 flex justify-end">
+            <x-ui.button tag="a" wire:navigate href="/dashboard/posts/create" class="">
+                <x-icons.post-add size="24" />
+                New Post
+            </x-ui.button>
+        </div>
         {{-- Create New Post --}}
-        <x-ui.button tag="a" wire:navigate href="/dashboard/posts/create">
-            <x-icons.post-add size="24" />
-            New Post
-        </x-ui.button>
     </div>
 
     {{-- Posts Table --}}
