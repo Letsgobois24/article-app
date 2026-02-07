@@ -5,7 +5,7 @@
 ])
 
 <div x-data="{ target: @entangle($target), from: @entangle($from) }">
-    <x-form.label :name="$name">{{ $label }}</x-form.label>
+    <x-form.label name="slug">{{ $label }}</x-form.label>
     <div class="flex">
         <input wire:model="{{ $target }}" x-on:focus="!target ? target=slugify(from) : false"
             id="{{ $target }}" type="text" name="slug"
@@ -26,6 +26,6 @@
         </button>
     </div>
 
-    <x-form.error-validation :name="$name" />
+    <x-form.error-validation name="slug" />
 
 </div>
