@@ -17,20 +17,16 @@ class Home extends Component
 
     public function render()
     {
-        $number = 20005;
-
-
-
-        $popularCategories = Category::postsCategoriesCount()->orderBy('posts_count', 'desc')->limit(4)->get();
-        $posts = Post::with(['category', 'author'])->latest()->limit(3)->get();
+        $popularCategories = Category::postsCategoriesCount()->orderBy('posts_count', 'desc')->limit(4);
+        $posts = Post::with(['category', 'author'])->latest()->limit(3);
 
         return view('livewire.pages.home', [
-            'popular_categories' => $popularCategories,
-            'latest_posts' => Cache::remember('posts.home', 300, fn() => $posts),
-            'total_posts' => Cache::remember('posts.total', 300, fn() => Post::count()),
-            'total_posts_year' => Cache::remember('posts.total.year', 300, fn() => Post::getPostsCount('year')),
-            'total_categories' => Cache::remember('categories.total', 300, fn() => Category::count()),
-            'total_authors' => Cache::remember('authors.total', 300, fn() => User::count()),
+            'popular_categories' => Cache::remember('posts.popular.categories', 180, fn() => $popularCategories->get()),
+            'latest_posts' => Cache::remember('posts.home', 180, fn() => $posts->get()),
+            'total_posts' => Cache::remember('posts.total', 180, fn() => Post::count()),
+            'total_posts_year' => Cache::remember('posts.total.year', 180, fn() => Post::getPostsCount('year')),
+            'total_categories' => Cache::remember('categories.total', 180, fn() => Category::count()),
+            'total_authors' => Cache::remember('authors.total', 180, fn() => User::count()),
         ]);
     }
 
