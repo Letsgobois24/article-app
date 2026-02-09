@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Dashboard;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -32,9 +33,20 @@ class Home extends Component
 
     public function render()
     {
+        $total_posts_all = 0;
+        $total_posts_year = 0;
+
+        if ($this->scope == 'global') {
+            $total_posts_all = Cache::remember('posts.total', 180, fn() => Post::count());
+            $total_posts_year = Cache::remember('posts.total', 180, fn() => Post::where('author_id', $this->author_id)->count());
+        } else {
+            $total_posts_all = Post::getPostsCount(null, $this->author_id);
+            $total_posts_year = Post::getPostsCount('year', $this->author_id);
+        }
+
         return view('livewire.pages.dashboard.home', [
-            'total_posts_all' => Post::getPostsCount(null, $this->author_id),
-            'total_posts_year' => Post::getPostsCount('year', $this->author_id),
+            'total_posts_all' => $total_posts_all,
+            'total_posts_year' => $total_posts_year,
             'total_posts_month' => Post::getPostsCount('month', $this->author_id),
             'total_posts_today' => Post::getPostsCount('day', $this->author_id)
         ])->title("Dashboard — " . ($this->scope == 'global' ? 'Admin ' : '') . "Artikula");
