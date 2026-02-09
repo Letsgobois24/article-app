@@ -4,10 +4,12 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
@@ -30,8 +32,7 @@ class Create extends Component
     public $body = '';
 
     #[Validate('image|file|max:2048')]
-    public $image = null;
-
+    public TemporaryUploadedFile | null $image = null;
 
     public function render()
     {
@@ -46,16 +47,41 @@ class Create extends Component
         $validatedData = $this->validate();
 
         if ($this->image) {
-            $validatedData['image'] = $this->image->store('post-images', 'public');
+            $fileName = $this->image->hashName();
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . config('services.supabase.key'),
+                'apikey' => config('services.supabase.key')
+            ])->withBody(
+                $this->image->get(),
+                $this->image->getMimeType()
+            )->post(
+                config('services.supabase.url') . '/storage/v1/object/' . config('services.supabase.bucket') . '/post-images/' . $fileName
+            );
+            if ($response->failed()) {
+                $response->dd();
+
+                session()->flash('status', [
+                    'theme' => 'danger',
+                    'message' => 'Upload failed!'
+                ]);
+
+                return $this->redirect(
+                    route('post-create'),
+                    navigate: true
+                );
+            }
+
+            $validatedData['image'] = $fileName;
+
+            session()->flash('status', [
+                'theme' => 'success',
+                'message' => 'New post has been added!'
+            ]);
         }
 
         $validatedData['author_id'] = auth()->user()->id;
         Post::create($validatedData);
 
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'New post has been added!'
-        ]);
         return $this->redirect(
             route('posts-dashboard'),
             navigate: true

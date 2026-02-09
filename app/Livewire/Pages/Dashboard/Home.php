@@ -38,7 +38,7 @@ class Home extends Component
 
         if ($this->scope == 'global') {
             $total_posts_all = Cache::remember('posts.total', 180, fn() => Post::count());
-            $total_posts_year = Cache::remember('posts.total', 180, fn() => Post::where('author_id', $this->author_id)->count());
+            $total_posts_year = Cache::remember('posts.total.year', 180, fn() => Post::getPostsCount('year'));
         } else {
             $total_posts_all = Post::getPostsCount(null, $this->author_id);
             $total_posts_year = Post::getPostsCount('year', $this->author_id);

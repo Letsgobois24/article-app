@@ -42,7 +42,7 @@ Route::get('/dashboard', DashboardHome::class)
     ->middleware('auth');
 
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');
-Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth');
+Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth')->name('post-create');
 Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('auth');
 Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
 

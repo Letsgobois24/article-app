@@ -37,7 +37,10 @@
                 </h1>
                 {{-- Body Image --}}
                 @if ($post->image)
-                    <img class="w-xl max-h-96 my-6 mx-auto object-cover" src="{{ asset('storage/' . $post->image) }}"
+                    {{-- <img class="w-xl max-h-96 my-6 mx-auto object-cover"
+                        src="{{ getImage('post-images/' . $post->image) }}" alt="{{ $post->title . ' Post Image' }}"> --}}
+                    <img class="w-xl max-h-96 my-6 mx-auto object-cover"
+                        src="{{ 'https://hdogsbczkqywpcxyvklx.supabase.co/storage/v1/object/public/uploads/post-images/' . $post->image }}"
                         alt="{{ $post->title . ' Post Image' }}">
                 @endif
                 {{-- Body Text --}}
