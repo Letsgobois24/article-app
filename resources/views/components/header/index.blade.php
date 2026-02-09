@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between p-5 lg:px-8">
         {{-- Logo --}}
         <div class="flex md:flex-1">
-            <a href="#" class="-m-1.5 p-1.5">
+            <a href="/" wire:navigate class="-m-1.5 p-1.5">
                 <img src="{{ asset('img/logo/logo-only.png') }}" alt="Logo Artikula" class="h-10 w-auto grayscale-50" />
             </a>
         </div>
@@ -67,7 +67,7 @@
     </div>
 
     {{-- Sidebar --}}
-    <div x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300"
+    <aside x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-50 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0"
         x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-x-0"
         x-transition:leave-end="opacity-50 translate-x-full"
@@ -111,17 +111,17 @@
                         <form action="/sign-out" method="POST">
                             @csrf
                             <button type="submit"
-                                class="w-full flex cursor-pointer text-gray-900 hover:bg-gray-50 -mx-3 rounded-lg px-3 py-2 font-semibold">Sign
+                                class="w-full flex cursor-pointer text-gray-900 hover:bg-gray-50 -mx-3 rounded-lg px-3 py-2 font-medium">Sign
                                 Out</button>
                         </form>
                     @else
                         <a wire:navigate.hover href="/sign-in"
-                            class="text-gray-900 hover:bg-gray-50 -mx-3 block rounded-lg px-3 py-2 font-semibold">Sign
+                            class="text-gray-900 hover:bg-gray-50 -mx-3 block rounded-lg px-3 py-2 font-medium">Sign
                             In</a>
                     @endauth
                 </div>
             </div>
         </div>
-    </div>
+    </aside>
 
 </nav>

@@ -1,7 +1,18 @@
 <a @if ($navigate) wire:navigate @endif href="{{ $href }}"
-    class="{{ $active ? 'bg-blue-600 text-gray-100' : 'text-gray-900 hover:bg-gray-100' }} group flex items-center px-2 py-3 text-base group rounded-lg group">
-    <span class="{{ $active ? 'text-gray-100' : 'text-gray-400' }}">
+    class="
+        group flex items-center gap-3 rounded-lg p-3
+        font-medium transition
+        {{ $active ? 'bg-emerald-100 text-emerald-700' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900' }}
+    ">
+    <span
+        class="
+            transition
+            {{ $active ? 'text-emerald-600' : 'text-gray-400 group-hover:text-gray-600' }}
+        ">
         {{ $icon }}
     </span>
-    <span class="ml-3">{{ $slot }}</span>
+
+    <span class="truncate">
+        {{ $slot }}
+    </span>
 </a>

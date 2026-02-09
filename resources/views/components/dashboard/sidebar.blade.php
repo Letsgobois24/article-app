@@ -35,7 +35,9 @@
         @can('admin')
             <hr class="border-gray-300">
             <div class="py-6">
-                <h6 class="text-gray-400 text-sm px-2 mb-2">ADMINISTRATOR</h6>
+                <h5 class="px-2 mb-2 text-sm font-medium tracking-wider text-gray-400 uppercase">
+                    Administration
+                </h5>
                 <ul class="nav-list">
                     <li>
                         <x-dashboard.link :navigate="false" href="/admin/dashboard">
@@ -59,10 +61,11 @@
 
         {{-- Home Button --}}
         <a href="/"
-            class="mt-auto mb-4 cursor-pointer mx-auto inline-flex justify-center items-center w-12 h-12
-          rounded-full border border-gray-300 text-gray-700
-          hover:bg-gray-100 transition">
-            <x-icons.home size='24' />
+            class="mt-auto mb-8 flex items-center justify-center gap-2 rounded-lg
+                       border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700
+                       hover:bg-gray-50 transition">
+            <x-icons.home size="18" />
+            Back to Home
         </a>
 
     </div>
