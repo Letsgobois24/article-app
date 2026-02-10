@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class SupabaseStorageService
 {

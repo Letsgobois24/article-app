@@ -4,7 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Post;
 use App\Services\CategoryService;
-use Illuminate\Support\Facades\Storage;
+use App\Services\SupabaseStorageService;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -47,7 +47,7 @@ class Edit extends Component
         ]);
     }
 
-    public function save()
+    public function save(SupabaseStorageService $storage)
     {
         $rules = [
             'title' => ['required', 'max:255'],
@@ -56,15 +56,43 @@ class Edit extends Component
             'body' => ['required'],
             'image' => 'nullable|image|max:2048'
         ];
-
         $validatedData = $this->validate($rules);
-
         if ($this->image instanceof TemporaryUploadedFile) {
             if ($this->lastImage) {
-                Storage::delete($this->lastImage);
+                // Delete object
+                $deleteResponse = $storage->delete($this->lastImage);
+
+                if ($deleteResponse->failed()) {
+                    session()->flash('status', [
+                        'theme' => 'danger',
+                        'message' => 'Change image failed!'
+                    ]);
+
+                    return $this->redirect(
+                        route('post-edit'),
+                        navigate: true
+                    );
+                }
             }
 
-            $validatedData['image'] = $this->image->store('post-images');
+            $newFileName = $this->image->hashName();
+            $createResponse = $storage->upload($newFileName, $this->image->get(), $this->image->getMimeType());
+
+            if ($createResponse->failed()) {
+                session()->flash('status', [
+                    'theme' => 'danger',
+                    'message' => 'Change image failed!'
+                ]);
+
+                return $this->redirect(
+                    route('post-edit'),
+                    navigate: true
+                );
+            }
+
+            $validatedData['image'] = $newFileName;
+        } else {
+            unset($validatedData['image']);
         }
 
         Post::where('id', $this->post_id)->update($validatedData);
@@ -74,7 +102,7 @@ class Edit extends Component
             'message' => 'Post has been updated!'
         ]);
         return $this->redirect(
-            route('posts-dashboard'),
+            route('post-show', ['post' => $this->slug]),
             navigate: true
         );
     }

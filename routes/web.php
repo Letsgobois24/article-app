@@ -43,8 +43,8 @@ Route::get('/dashboard', DashboardHome::class)
 
 Route::get('/dashboard/posts', DashboardPost::class)->middleware('auth')->name('posts-dashboard');
 Route::get('/dashboard/posts/create', CreatePost::class)->middleware('auth')->name('post-create');
-Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('auth');
-Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth');
+Route::get('/dashboard/posts/{post:slug}/edit', EditPost::class)->middleware('auth')->name('post-edit');
+Route::get('/dashboard/posts/{post:slug}', ShowPost::class)->middleware('auth')->name('post-show');
 
 Route::get('/dashboard/categories', DashboardCategory::class)->middleware(IsAdmin::class)->name('categories-dashboard');
 Route::get('/admin/dashboard', DashboardHome::class)

@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\SupabaseStorageService;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -42,24 +43,14 @@ class Create extends Component
         ]);
     }
 
-    public function save()
+    public function save(SupabaseStorageService $storage)
     {
         $validatedData = $this->validate();
 
         if ($this->image) {
             $fileName = $this->image->hashName();
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . config('services.supabase.key'),
-                'apikey' => config('services.supabase.key')
-            ])->withBody(
-                $this->image->get(),
-                $this->image->getMimeType()
-            )->post(
-                config('services.supabase.url') . '/storage/v1/object/' . config('services.supabase.bucket') . '/post-images/' . $fileName
-            );
+            $response = $storage->upload($fileName, $this->image->get(), $this->image->getMimeType());
             if ($response->failed()) {
-                $response->dd();
-
                 session()->flash('status', [
                     'theme' => 'danger',
                     'message' => 'Upload failed!'
@@ -83,7 +74,7 @@ class Create extends Component
         Post::create($validatedData);
 
         return $this->redirect(
-            route('posts-dashboard'),
+            route('post-show', ['post' => $this->slug]),
             navigate: true
         );
     }

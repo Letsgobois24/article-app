@@ -43,7 +43,7 @@
         </p>
 
         {{-- Submit --}}
-        <x-ui.submit-button target="save" class="col-span-full">{{ $isEdit ? 'Edit' : 'Create New' }}
+        <x-ui.submit-button target="image, save" class="col-span-full">{{ $isEdit ? 'Edit' : 'Create New' }}
             Post</x-ui.submit-button>
     </form>
 </div>
@@ -51,7 +51,7 @@
 <script>
     function imagePreview() {
         return {
-            imageUrl: @js(isset($lastImage) ? asset('storage/' . $lastImage) : null),
+            imageUrl: @js(isset($lastImage) ? 'https://hdogsbczkqywpcxyvklx.supabase.co/storage/v1/object/public/uploads/post-images/' . $lastImage : null),
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {
