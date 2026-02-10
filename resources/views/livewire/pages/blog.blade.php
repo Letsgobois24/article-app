@@ -38,8 +38,8 @@
                 </h1>
                 {{-- Body Image --}}
                 @if ($post->image)
-                    <img class="w-xl max-h-96 my-6 mx-auto object-cover" src="{{ asset('storage/' . $post->image) }}"
-                        alt="">
+                    <img class="w-xl max-h-96 my-6 mx-auto object-cover"
+                        src="{{ getImage('post-images/' . $post->image) }}" alt="">
                 @endif
                 {{-- Body Text --}}
                 <div class="post-body">{{ Str::of($post->body)->toHtmlString() }}</div>

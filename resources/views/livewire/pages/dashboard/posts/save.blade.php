@@ -51,7 +51,7 @@
 <script>
     function imagePreview() {
         return {
-            imageUrl: @js(isset($lastImage) ? 'https://hdogsbczkqywpcxyvklx.supabase.co/storage/v1/object/public/uploads/post-images/' . $lastImage : null),
+            imageUrl: @js(isset($lastImage) ? getImage('post-images/' . $lastImage) : null),
             previewImage(e) {
                 const file = e.target.files[0];
                 if (file) {
