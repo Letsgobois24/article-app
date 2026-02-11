@@ -3,8 +3,7 @@
 namespace App\Livewire\Components;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
+use App\Services\PostService;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -46,31 +45,16 @@ class PostsSection extends Component
         return view('components.placeholder.posts-table');
     }
 
-    #[On('delete-confirm')]
     public function destroy($id)
     {
-        $post = Post::find($id, ['image']);
+        $service = new PostService;
+        $response = $service->deletePost($id);
 
-        if ($post->image) {
-            Storage::delete($post->image);
+        if (!$response) {
+            $this->dispatch('toast', type: 'danger', message: 'Failed to delete post!');
+            return;
         }
 
-        Post::destroy($id);
-
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'Post has been deleted succesfully'
-        ]);
-        return $this->redirect(
-            route('posts-dashboard'),
-            navigate: true
-        );
-    }
-
-    #[On('set-category')]
-    public function setCategory($slug)
-    {
-        $this->category = $slug;
-        $this->resetPage();
+        $this->dispatch('toast', type: 'success', message: 'Post has been deleted succesfully');
     }
 }
