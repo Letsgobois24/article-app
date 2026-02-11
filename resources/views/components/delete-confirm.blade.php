@@ -22,13 +22,13 @@
                     <x-icons.rounded-danger size="48" class="mx-auto mb-4 text-fg-disabled" />
                     <h3 class="mb-6 text-body">Are you sure you want to delete this?</h3>
                     <div x-data="{ isLoading: false }" class="flex items-center space-x-4 justify-center">
-                        <button x-on:click="$dispatch('delete-confirm', { id:'{{ $id }}'}); isLoading=true"
-                            x-show="!isLoading" type="button"
+                        <button wire:click="destroy({{ $id }}); isLoading=true" x-show="!isLoading"
+                            type="button"
                             class="cursor-pointer text-white bg-red-600 box-border border border-transparent hover:bg-red-700 focus:ring-4 focus:ring-danger-medium shadow-xs font-medium leading-5 rounded-base text-sm self-stretch w-30 focus:outline-none">
                             Yes, I'm sure
                         </button>
                         {{-- Loading --}}
-                        <button x-show="isLoading"
+                        <button x-show="isLoading" x-on:toast.window="isDeleteModal=false; isLoading=false"
                             class="text-white bg-red-400 box-border border border-transparent shadow-xs font-medium leading-5 rounded-base text-sm w-30 self-stretch focus:outline-none">
                             <div
                                 class="w-4 h-4 border-2 mx-auto border-gray-300 border-t-blue-600 rounded-full animate-spin">
