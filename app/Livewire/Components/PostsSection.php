@@ -57,4 +57,10 @@ class PostsSection extends Component
 
         $this->dispatch('toast', type: 'success', message: 'Post has been deleted succesfully');
     }
+
+    public function resetSearch()
+    {
+        $this->dispatch('reset-search');
+        $this->resetPage();
+    }
 }

@@ -32,7 +32,7 @@ class Index extends Component
         $this->category = $slug;
     }
 
-    #[On('resetSearch')]
+    #[On('reset-search')]
     public function resetSearch()
     {
         $this->reset('search');
