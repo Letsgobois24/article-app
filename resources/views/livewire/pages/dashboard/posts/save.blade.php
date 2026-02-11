@@ -43,7 +43,7 @@
         </p>
 
         {{-- Submit --}}
-        <x-ui.submit-button target="image, save" class="col-span-full">{{ $isEdit ? 'Edit' : 'Create New' }}
+        <x-ui.submit-button target="image,save,body" class="col-span-full">{{ $isEdit ? 'Edit' : 'Create New' }}
             Post</x-ui.submit-button>
     </form>
 </div>
