@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 class CategoriesTable extends Component
 {
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination;
 
     #[Reactive]
     public $search = '';
@@ -53,7 +53,8 @@ class CategoriesTable extends Component
 
     public function resetSearch()
     {
-        $this->dispatch('resetSearch');
+        $this->dispatch('reset-search');
+        $this->resetPage();
     }
 
     public function placeholder()

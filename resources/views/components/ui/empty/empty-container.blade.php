@@ -6,8 +6,7 @@
         </p>
         {{ $slot }}
     </div>
-    <button wire:click="$dispatch('resetSearch')"
-        class="cursor-pointer mt-2 text-sm font-medium text-primary hover:underline">
+    <button wire:click="resetSearch" class="cursor-pointer mt-2 text-sm font-medium text-primary hover:underline">
         Reset pencarian
     </button>
 </div>

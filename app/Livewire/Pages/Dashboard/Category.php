@@ -63,7 +63,7 @@ class Category extends Component
     }
 
 
-    #[On('resetSearch')]
+    #[On('reset-search')]
     public function resetSearch()
     {
         $this->reset('search');
