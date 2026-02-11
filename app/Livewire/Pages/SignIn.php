@@ -34,6 +34,6 @@ class SignIn extends Component
             return redirect()->intended('/');
         }
 
-        session()->flash('status', ['theme' => 'danger', 'message' => 'Invalid email or password!']);
+        $this->dispatch('toast', type: 'danger', message: 'Invalid email or password!');
     }
 }

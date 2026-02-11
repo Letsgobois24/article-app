@@ -34,7 +34,7 @@
     <livewire:components.dashboard.category.categories-table lazy :search="$search" />
 
     {{-- Modal --}}
-    <div x-show="isOpenModal" x-cloak>
+    <div x-show="isOpenModal" x-cloak x-on:toast.window="isOpenModal=false">
         <x-dashboard.categories.modal />
     </div>
 </div>

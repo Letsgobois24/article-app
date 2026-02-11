@@ -42,14 +42,7 @@ class Contact extends Component
         $validatedData = $this->validate();
         Message::create($validatedData);
 
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'Message has been sended!'
-        ]);
-
-        return $this->redirect(
-            route('contact'),
-            navigate: true
-        );
+        $this->dispatch('toast', type: 'success', message: 'Message has been sended!');
+        $this->reset('subject', 'message');
     }
 }

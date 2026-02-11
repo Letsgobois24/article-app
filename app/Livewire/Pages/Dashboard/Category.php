@@ -4,7 +4,6 @@ namespace App\Livewire\Pages\Dashboard;
 
 use App\Models\Category as CategoryModel;
 use App\Services\CategoryService;
-use Illuminate\Database\QueryException;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -49,60 +48,20 @@ class Category extends Component
             // Create New Category
             $validatedData = $this->validate($rules);
             CategoryModel::create($validatedData);
+            $this->dispatch('toast', type: 'success', message: 'New category has been added!');
         } else {
             // Update Category
             $rules['slug'][1] = $rules['slug'][1]->ignore($this->lastSlug, 'slug');
             $rules['color'][1] = $rules['color'][1]->ignore($this->lastColor, 'color');
             $validatedData = $this->validate($rules);
             CategoryModel::where('id', $this->id)->update($validatedData);
+            $this->dispatch('toast', type: 'success', message: 'Category has been updated');
         }
-
-        // Flash Message
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => !$this->id ? 'New category has been added!' : 'Category has been updated'
-        ]);
 
         // Reset Input
         CategoryService::clearCache();
-
-        // Redirect back
-        return $this->redirect(
-            route('categories-dashboard'),
-            navigate: true
-        );
     }
 
-    #[On('delete-confirm')]
-    public function destroy($id)
-    {
-        try {
-            CategoryModel::destroy($id);
-            CategoryService::clearCache();
-
-            session()->flash('status', [
-                'theme' => 'success',
-                'message' => 'Category has been deleted succesfully'
-            ]);
-        } catch (QueryException $e) {
-            if ($e->getCode() == '23503')
-                session()->flash('status', [
-                    'theme' => 'danger',
-                    'message' => 'Categories are still referenced by other data'
-                ]);
-            else {
-                session()->flash('status', [
-                    'theme' => 'danger',
-                    'message' => 'Error deleted category'
-                ]);
-            }
-        }
-
-        return $this->redirect(
-            route('categories-dashboard'),
-            navigate: true
-        );
-    }
 
     #[On('resetSearch')]
     public function resetSearch()

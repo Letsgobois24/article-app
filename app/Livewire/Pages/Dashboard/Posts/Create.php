@@ -51,28 +51,17 @@ class Create extends Component
             $fileName = $this->image->hashName();
             $response = $storage->upload($fileName, $this->image->get(), $this->image->getMimeType());
             if ($response->failed()) {
-                session()->flash('status', [
-                    'theme' => 'danger',
-                    'message' => 'Upload failed!'
-                ]);
-
-                return $this->redirect(
-                    route('post-create'),
-                    navigate: true
-                );
+                $this->dispatch('toast', type: 'danger', message: 'Upload failed!');
+                return;
             }
 
             $validatedData['image'] = $fileName;
-
-            session()->flash('status', [
-                'theme' => 'success',
-                'message' => 'New post has been added!'
-            ]);
         }
 
         $validatedData['author_id'] = auth()->user()->id;
         Post::create($validatedData);
 
+        $this->dispatch('toast', type: 'success', message: 'New post has been added');
         return $this->redirect(
             route('post-show', ['post' => $this->slug]),
             navigate: true

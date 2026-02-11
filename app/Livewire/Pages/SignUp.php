@@ -36,13 +36,9 @@ class SignUp extends Component
     function store()
     {
         $validatedData = $this->validate();
-
         User::create($validatedData);
 
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'Registration Successful. Please login!'
-        ]);
+        $this->dispatch('toast', type: 'success', message: 'Registration Successful. Please login!');
 
         return $this->redirect(
             route('login'),

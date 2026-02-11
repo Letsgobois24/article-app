@@ -63,15 +63,8 @@ class Edit extends Component
                 $deleteResponse = $storage->delete($this->lastImage);
 
                 if ($deleteResponse->failed()) {
-                    session()->flash('status', [
-                        'theme' => 'danger',
-                        'message' => 'Change image failed!'
-                    ]);
-
-                    return $this->redirect(
-                        route('post-edit'),
-                        navigate: true
-                    );
+                    $this->dispatch('toast', type: 'danger', message: 'Change image failed!');
+                    return;
                 }
             }
 
@@ -79,15 +72,7 @@ class Edit extends Component
             $createResponse = $storage->upload($newFileName, $this->image->get(), $this->image->getMimeType());
 
             if ($createResponse->failed()) {
-                session()->flash('status', [
-                    'theme' => 'danger',
-                    'message' => 'Change image failed!'
-                ]);
-
-                return $this->redirect(
-                    route('post-edit'),
-                    navigate: true
-                );
+                $this->dispatch('toast', type: 'danger', message: 'Change image failed!');
             }
 
             $validatedData['image'] = $newFileName;
@@ -97,10 +82,8 @@ class Edit extends Component
 
         Post::where('id', $this->post_id)->update($validatedData);
 
-        session()->flash('status', [
-            'theme' => 'success',
-            'message' => 'Post has been updated!'
-        ]);
+        $this->dispatch('toast', type: 'success', message: 'Post has been updated!');
+
         return $this->redirect(
             route('post-show', ['post' => $this->slug]),
             navigate: true
