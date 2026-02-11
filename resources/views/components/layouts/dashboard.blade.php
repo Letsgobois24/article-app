@@ -27,11 +27,8 @@
     @livewireScripts
     @livewireChartsScripts
     <script src="{{ asset('js/slugify.js') }}"></script>
+    <x-toaster />
 </body>
 
-{{-- Toaster --}}
-@if (session('status'))
-    <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
-@endif
 
 </html>

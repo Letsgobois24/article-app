@@ -15,9 +15,4 @@
             Create one
         </a>
     </p>
-
-
-    @if (session('status'))
-        <x-toaster theme="{{ session('status')['theme'] }}">{{ session('status')['message'] }}</x-toaster>
-    @endif
 </div>
