@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Post;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class PostService
 {
@@ -24,6 +25,26 @@ class PostService
         }
 
         Post::destroy($id);
+        return true;
+    }
+
+    public function createPost($data, TemporaryUploadedFile $image)
+    {
+        if ($image) {
+            $storage = new SupabaseStorageService;
+
+            $fileName = $image->hashName();
+            $response = $storage->upload($fileName, $image->get(), $image->getMimeType());
+            if ($response->failed()) {
+                return false;
+            }
+
+            $data['image'] = $fileName;
+        }
+
+        $data['author_id'] = auth()->user()->id;
+        Post::create($data);
+
         return true;
     }
 }

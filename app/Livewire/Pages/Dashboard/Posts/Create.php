@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\PostService;
 use App\Services\SupabaseStorageService;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
@@ -43,23 +44,16 @@ class Create extends Component
         ]);
     }
 
-    public function save(SupabaseStorageService $storage)
+    public function save(PostService $service)
     {
+
         $validatedData = $this->validate();
+        $response = $service->createPost($validatedData, $this->image);
 
-        if ($this->image) {
-            $fileName = $this->image->hashName();
-            $response = $storage->upload($fileName, $this->image->get(), $this->image->getMimeType());
-            if ($response->failed()) {
-                $this->dispatch('toast', type: 'danger', message: 'Upload failed!');
-                return;
-            }
-
-            $validatedData['image'] = $fileName;
+        if (!$response) {
+            $this->dispatch('toast', type: 'danger', message: 'Failed to create new post');
+            return;
         }
-
-        $validatedData['author_id'] = auth()->user()->id;
-        Post::create($validatedData);
 
         $this->dispatch('toast', type: 'success', message: 'New post has been added');
         return $this->redirect(

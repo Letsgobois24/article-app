@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 
 class CategoriesTable extends Component
 {
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
 
     #[Reactive]
     public $search = '';

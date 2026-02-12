@@ -62,7 +62,6 @@ class Category extends Component
         CategoryService::clearCache();
     }
 
-
     #[On('reset-search')]
     public function resetSearch()
     {

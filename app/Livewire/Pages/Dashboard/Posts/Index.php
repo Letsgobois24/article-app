@@ -2,8 +2,7 @@
 
 namespace App\Livewire\Pages\Dashboard\Posts;
 
-use App\Models\Post;
-use App\Services\SupabaseStorageService;
+use App\Services\PostService;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
@@ -39,18 +38,13 @@ class Index extends Component
     }
 
     #[On('delete-confirm')]
-    public function destroy($id)
+    public function destroy($id, PostService $service)
     {
-        dd('delete-confirm');
-
-        $post = Post::find($id, ['image']);
-
-        if ($post->image) {
-            $storage = new SupabaseStorageService;
-            $storage->delete($this->lastImage);
+        if (!$service->deletePost($id)) {
+            $this->dispatch('toast', type: 'danger', message: 'Failed to delete post!');
+            return;
         }
 
-        Post::destroy($id);
         $this->dispatch('toast', type: 'success', message: 'Post has been deleted succesfully');
     }
 }
