@@ -38,9 +38,12 @@ class SignUp extends Component
         $validatedData = $this->validate();
         User::create($validatedData);
 
-        $this->dispatch('toast', type: 'success', message: 'Registration Successful. Please login!');
+        session()->flash('alert', [
+            'type' => 'success',
+            'message' => 'Registration Successful. Please login!'
+        ]);
 
-        return $this->redirect(
+        $this->redirect(
             route('login'),
             navigate: true
         );

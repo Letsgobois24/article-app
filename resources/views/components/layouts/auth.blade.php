@@ -36,8 +36,7 @@
 
         </section>
     </main>
-    {{-- Toaster --}}
-    <x-toaster />
+
 </body>
 
 </html>

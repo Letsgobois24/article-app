@@ -19,6 +19,13 @@ class SignIn extends Component
     #[Validate('required')]
     public string $password;
 
+    public function mount()
+    {
+        if (session()->has('alert')) {
+            $this->dispatch('alert', type: 'success', message: 'Registration Successful. Please login!');
+        }
+    }
+
     public function render()
     {
         return view('livewire.pages.sign-in')->layoutData(['isSignInPage' => true]);
@@ -34,6 +41,6 @@ class SignIn extends Component
             return redirect()->intended('/');
         }
 
-        $this->dispatch('toast', type: 'danger', message: 'Invalid email or password!');
+        $this->dispatch('alert', type: 'danger', message: 'Invalid email or password!');
     }
 }

@@ -1,7 +1,7 @@
 <div wire:ignore x-cloak x-data="{
     isShow: false,
-    type: '',
-    message: 'success',
+    type: 'success',
+    message: '',
     colors: {
         success: 'bg-emerald-100 text-emerald-600',
         danger: 'bg-red-100 text-red-600',
@@ -28,7 +28,7 @@
             <x-icons.warning size="20" />
         </template>
     </div>
-    <div class="ms-3 text-sm font-normal" x-text="message"></span></div>
+    <div class="ms-3 text-sm font-normal" x-text="message"></div>
     <button type="button" x-on:click="isShow=false"
         class="cursor-pointer ms-auto flex items-center justify-center text-body hover:text-heading bg-transparent box-border border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded text-sm h-8 w-8 focus:outline-none">
         <x-icons.cross size="20" />
