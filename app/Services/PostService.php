@@ -47,4 +47,36 @@ class PostService
 
         return true;
     }
+
+    public function editPost(int $id, $data, TemporaryUploadedFile | null $image, string | null $lastImage)
+    {
+        if ($image instanceof TemporaryUploadedFile) {
+            $storage = new SupabaseStorageService;
+            if ($lastImage) {
+                // Delete object
+                $deleteResponse = $storage->delete($lastImage);
+
+                if ($deleteResponse->failed()) {
+                    return false;
+                }
+            }
+
+            // Upload Image
+            $newFileName = $image->hashName();
+            $uploadResponse = $storage->upload($newFileName, $image->get(), $image->getMimeType());
+
+            if ($uploadResponse->failed()) {
+                return false;
+            }
+
+            $data['image'] = $newFileName;
+        } else {
+            unset($data['image']);
+        }
+
+        // Update data
+        Post::where('id', $id)->update($data);
+
+        return true;
+    }
 }

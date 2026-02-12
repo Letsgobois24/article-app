@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Post;
 use App\Services\CategoryService;
+use App\Services\PostService;
 use App\Services\SupabaseStorageService;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
@@ -47,7 +48,7 @@ class Edit extends Component
         ]);
     }
 
-    public function save(SupabaseStorageService $storage)
+    public function save(PostService $service)
     {
         $rules = [
             'title' => ['required', 'max:255'],
@@ -57,33 +58,14 @@ class Edit extends Component
             'image' => 'nullable|image|max:2048'
         ];
         $validatedData = $this->validate($rules);
-        if ($this->image instanceof TemporaryUploadedFile) {
-            if ($this->lastImage) {
-                // Delete object
-                $deleteResponse = $storage->delete($this->lastImage);
 
-                if ($deleteResponse->failed()) {
-                    $this->dispatch('toast', type: 'danger', message: 'Change image failed!');
-                    return;
-                }
-            }
+        $response = $service->editPost($this->post_id, $validatedData, $this->image, $this->lastImage);
 
-            $newFileName = $this->image->hashName();
-            $createResponse = $storage->upload($newFileName, $this->image->get(), $this->image->getMimeType());
-
-            if ($createResponse->failed()) {
-                $this->dispatch('toast', type: 'danger', message: 'Change image failed!');
-            }
-
-            $validatedData['image'] = $newFileName;
-        } else {
-            unset($validatedData['image']);
+        if (!$response) {
+            $this->dispatch('toast', type: 'danger', message: 'Failed to edit post!');
         }
 
-        Post::where('id', $this->post_id)->update($validatedData);
-
         $this->dispatch('toast', type: 'success', message: 'Post has been updated!');
-
         return $this->redirect(
             route('post-show', ['post' => $this->slug]),
             navigate: true
