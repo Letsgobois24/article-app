@@ -5,12 +5,10 @@ namespace App\Livewire\Pages\Dashboard\Posts;
 use App\Models\Post;
 use App\Services\CategoryService;
 use App\Services\PostService;
-use App\Services\SupabaseStorageService;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]

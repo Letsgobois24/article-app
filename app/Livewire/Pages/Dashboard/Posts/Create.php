@@ -3,10 +3,7 @@
 namespace App\Livewire\Pages\Dashboard\Posts;
 
 use App\Models\Category;
-use App\Models\Post;
 use App\Services\PostService;
-use App\Services\SupabaseStorageService;
-use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;

@@ -28,7 +28,7 @@ class PostService
         return true;
     }
 
-    public function createPost($data, TemporaryUploadedFile $image)
+    public function createPost($data, TemporaryUploadedFile $image): bool
     {
         if ($image) {
             $storage = new SupabaseStorageService;
@@ -48,7 +48,7 @@ class PostService
         return true;
     }
 
-    public function editPost(int $id, $data, TemporaryUploadedFile | null $image, string | null $lastImage)
+    public function editPost(int $id, $data, TemporaryUploadedFile | null $image, string | null $lastImage): bool
     {
         if ($image instanceof TemporaryUploadedFile) {
             $storage = new SupabaseStorageService;
