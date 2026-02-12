@@ -22,7 +22,8 @@ class SignIn extends Component
     public function mount()
     {
         if (session()->has('alert')) {
-            $this->dispatch('alert', type: 'success', message: 'Registration Successful. Please login!');
+            $session = session('alert');
+            $this->dispatch('alert', type: $session['type'], message: $session['message']);
         }
     }
 
