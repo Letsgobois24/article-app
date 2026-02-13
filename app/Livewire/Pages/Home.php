@@ -33,11 +33,15 @@ class Home extends Component
 
     public function signIn()
     {
+        if (Auth::check()) {
+            return $this->redirect('/dashboard/posts');
+        }
+
         session()->flash('alert', [
             'type' => 'warning',
             'message' => 'Please, login first!'
         ]);
-        $this->redirect('/sign-in');
+        return $this->redirect('/sign-in');
     }
 
     public function searching()
