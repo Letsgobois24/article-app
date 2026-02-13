@@ -5,6 +5,7 @@ namespace App\Livewire\Pages;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -28,6 +29,15 @@ class Home extends Component
             'total_categories' => Cache::remember('categories.total', 180, fn() => Category::count()),
             'total_authors' => Cache::remember('authors.total', 180, fn() => User::count()),
         ]);
+    }
+
+    public function signIn()
+    {
+        session()->flash('alert', [
+            'type' => 'warning',
+            'message' => 'Please, login first!'
+        ]);
+        $this->redirect('/sign-in');
     }
 
     public function searching()

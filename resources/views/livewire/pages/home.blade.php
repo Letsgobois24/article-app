@@ -116,11 +116,10 @@
                 <p class="mb-6 text-emerald-100">
                     Share your thoughts and articles with a broader audience.
                 </p>
-                <a href="@auth /dashboard/posts @else /sign-in @endauth"
-                    class="inline-block bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition">
+                <a @auth href="/dashboard/posts" @else wire:click='signIn' @endauth
+                    class="cursor-pointer inline-block bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition disabled:opacity-70 disabled:cursor-not-allowed">
                     Write an Article
                 </a>
             </div>
         </section>
-
     </main>
